@@ -48,8 +48,33 @@ def count_el(arr)
   arr_2.count
 end
 
-#p el_until_last_min([10,1,5,3,2,1])
-#p el_after_first_max([10,1,2,10,3,4])
-#p arr_plus_minus([10,-2,3,3,1])
-#p arr_sum_in_interval([10,1,2,3,4,10],0,5)
-#p count_el([1,1,3,6,15])
+filepath = "C:/Users/Владислав/RubymineProjects/labs/lab1/task_4/arr.txt"
+file = File.open("#{filepath.chomp}")
+arr = file.readline.split(' ').map{|item|item.to_i }
+
+puts "Массив: #{arr}"
+puts "Выберете функцию"
+
+puts " 1 - Нахождение элементов,расположенные перед последним минимальным"
+puts "2 - Нахождение элементов, расположенные после первого максимального."
+puts "3 - Проверить, чередуются ли в нем положительные и отрицательные числа."
+puts "4 - Нахождение количества таких элементов, которые больше, чем сумма всех предыдущих."
+puts "5 - Дан интервал a..b. Необходимо найти сумму элементов, значение которых попадает в этот интервал"
+
+choice = STDIN.gets.chomp
+case choice
+when "1"
+  p el_until_last_min(arr)
+when "2"
+  p el_after_first_max(arr)
+when "3"
+  p arr_plus_minus(arr)
+when "4"
+  p count_el(arr)
+when "5"
+  a=STDIN.gets.chomp.to_i
+  b=STDIN.gets.chomp.to_i
+  p arr_sum_in_interval(arr,a,b)
+else
+  p "Чел, ты не справился"
+end
