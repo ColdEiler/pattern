@@ -44,12 +44,12 @@ def arr_sum_in_interval (arr,a,b)
 end
 
 def count_el(arr)
-  arr_2 = arr.filter{|n| n > arr[0..arr.index(n)-1].sum}
+  arr_2 = arr.filter{|n|if arr.index(n) == 0 then n > 0 else n > arr[0..arr.index(n)-1].sum end}
   arr_2.count
 end
 
 filepath = "C:/Users/Владислав/RubymineProjects/labs/lab1/task_4/arr.txt"
-file = File.open("#{filepath.chomp}")
+file = File.open("#{filepath}")
 arr = file.readline.split(' ').map{|item|item.to_i }
 
 puts "Массив: #{arr}"
@@ -64,17 +64,18 @@ puts "5 - Дан интервал a..b. Необходимо найти сумм
 choice = STDIN.gets.chomp
 case choice
 when "1"
-  p el_until_last_min(arr)
+  puts el_until_last_min(arr)
 when "2"
-  p el_after_first_max(arr)
+  puts el_after_first_max(arr)
 when "3"
-  p arr_plus_minus(arr)
+  puts arr_plus_minus(arr)
 when "4"
-  p count_el(arr)
+  puts count_el(arr)
 when "5"
+  puts "Введите интервал"
   a=STDIN.gets.chomp.to_i
   b=STDIN.gets.chomp.to_i
-  p arr_sum_in_interval(arr,a,b)
+  puts arr_sum_in_interval(arr,a,b)
 else
   p "Чел, ты не справился"
 end
