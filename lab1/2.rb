@@ -18,6 +18,7 @@ def pr_digit(num,proc)
   p
 end
 
+
 def nod (a,b)
   if a == b then a
   elsif (a>b) then
@@ -41,8 +42,8 @@ tr=Proc.new{|n| true}
 
 num = welcome( "Введите число для метода  максимальный простой делитель числа")
 
-proc = Proc.new {|n| if prime(n) then true else false end}
-p max_div(num,proc,tr)
+prime_f = Proc.new {|n| if prime(n) then true else false end}
+p max_div(num,prime_f,tr)
 
 num=welcome("Введите число для метода: произведение цифр числа, не делящихся на 5")
 proc = Proc.new{ |n| if n!=5 then true else false end}
@@ -52,7 +53,9 @@ num=welcome("Введите число для метода: НОД максим�
 числа и прозведения цифр данного числа.")
 nech_max_notprime_div= max_div(num,Proc.new{|n| if n % 2 == 1 then true else false end},Proc.new{|n| if prime(n) then false else true end})
 pr_ch = pr_digit(num,tr)
+
 if pr_ch != 0 then
   p nod(pr_ch,nech_max_notprime_div)
 else puts "Произведение числа = 0!!!"
 end
+
