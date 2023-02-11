@@ -31,11 +31,8 @@ def el_after_first_max(arr)
 end
 
 def arr_plus_minus(arr)
-  arr.each do |n| y=arr.slice(arr.index(n)+1)
-  return true if y == nil
-  return false if n*y >0
-  end
-  true
+  arr2=arr.filter{|n| y=arr.slice(arr.index(n)+1),    if y!=nil then n*y>0 else return true end}
+  false if arr2.size !=0
 end
 
 def arr_sum_in_interval (arr,a,b)
@@ -68,7 +65,7 @@ when "1"
 when "2"
   puts el_after_first_max(arr)
 when "3"
-  puts arr_plus_minus(arr)
+  puts arr_plus_minus([-1,2,-3,4])
 when "4"
   puts count_el(arr)
 when "5"
