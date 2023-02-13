@@ -37,7 +37,18 @@ class Student
     raise ArgumentError,'Некорретный ввод: phone !!!'unless Student.is_val_phone?(phone)
     @phone = phone
   end
-
+  def email=(email)
+    raise ArgumentError,'Некорретный ввод: email !!!'unless Student.is_val_email?(email)
+    @email = email
+  end
+  def telegram=(telegram)
+    raise ArgumentError,'Некорретный ввод: telegram !!!'unless Student.is_val_telegram?(telegram)
+    @telegram = telegram
+  end
+  def git=(git)
+    raise ArgumentError,'Некорретный ввод: git !!!'unless Student.is_val_git?(git)
+    @git = git
+  end
 
   def to_s
     res = "#{self.lastname} #{self.firstname} #{self.father_name}"
