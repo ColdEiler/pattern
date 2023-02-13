@@ -1,7 +1,25 @@
 class Student
   #сеттеры и гетторы
-  attr_accessor :lastname, :firstname, :father_name, :id, :telegram, :email, :git
-  attr_reader :phone
+  attr_accessor :lastname, :firstname, :father_name, :id
+  attr_reader :phone, :telegram, :email, :git
+
+  #validation
+  def self.is_val_phone?(phone)
+    phone =~ /^\+?[7|8].?\(?\d{3}\)?\-?\d{3}\-?\d{2}\-?\d{2}$/
+  end
+
+  def self.is_val_email?(email)
+    email =~ /^[a-zA-Z\d\.]+@[a-z\d\.]+/
+  end
+
+  def self.is_val_git?(git)
+    git=~ /[A-Za-z0-9-_]+$/
+  end
+
+  def self.is_val_telegram?(telegram)
+    telegram =~ /@[A-Za-z0-9-_]+$/
+  end
+
   def initialize(lastname, firstname,father_name,options={})
     self.lastname=lastname
     self.firstname=firstname
@@ -14,15 +32,13 @@ class Student
   end
 
 
-  #validation
-  def self.is_val_phone?(phone)
-    phone =~ /^\+?[7|8].?\(?\d{3}\)?\-?\d{3}\-?\d{2}\-?\d{2}$/
-  end
   #setter
   def phone=(phone)
     raise ArgumentError,'Некорретный ввод: phone !!!'unless Student.is_val_phone?(phone)
     @phone = phone
   end
+
+
   def to_s
     res = "#{self.lastname} #{self.firstname} #{self.father_name}"
     res+= " id = #{self.id}" unless id.nil?
