@@ -20,6 +20,9 @@ class Student
     telegram =~ /@[A-Za-z0-9-_]+$/
   end
 
+  def self.is_val_name?(name)
+    name=~/^[А-Я][а-я]+/
+  end
   def initialize(lastname, firstname,father_name,options={})
     self.lastname=lastname
     self.firstname=firstname
@@ -33,6 +36,20 @@ class Student
 
 
   #setter
+  def lastname=(lastname)
+    raise ArgumentError,'Некорретный ввод: lastname !!!'unless Student.is_val_name?(lastname)
+    @lastname = lastname
+  end
+
+  def firstname=(firstname)
+    raise ArgumentError,'Некорретный ввод: firstname !!!'unless Student.is_val_name?(firstname)
+    @firstname = firstname
+  end
+
+  def father_name=(father_name)
+    raise ArgumentError,'Некорретный ввод: father_name !!!'unless Student.is_val_name?(father_name)
+    @father_name = father_name
+  end
   def phone=(phone)
     raise ArgumentError,'Некорретный ввод: phone !!!'unless Student.is_val_phone?(phone)
     @phone = phone
