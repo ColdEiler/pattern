@@ -10,4 +10,13 @@ class Student
     self.email=options[:email]
     self.git=options[:git]
   end
+  def to_s
+    res = "#{self.lastname} #{self.firstname} #{self.father_name}"
+    res+= " id = #{self.id}" unless id.nil?
+    res+= " phone = #{self.phone}" unless phone.nil?
+    res+= " telegram = #{self.telegram}" unless telegram.nil?
+    res+= " email = #{self.email}" unless email.nil?
+    res+= " git = #{self.git}" unless git.nil?
+    res
+  end
 end
