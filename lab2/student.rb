@@ -73,6 +73,11 @@ class Student
     @git = git
   end
 
+  def set_contacts(contacts)
+    self.phone = contacts[:phone] unless contacts[:phone].nil?
+    self.telegram = contacts[:telegram] unless contacts[:telegram].nil?
+    self.phone = contacts[:email] unless contacts[:email].nil?
+  end
   def to_s
     res = "#{self.lastname} #{self.firstname} #{self.father_name}"
     res+= " id = #{self.id}" unless id.nil?
