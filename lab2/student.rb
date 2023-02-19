@@ -8,6 +8,12 @@ class Student
     phone =~ /^\+?[7|8].?\(?\d{3}\)?\-?\d{3}\-?\d{2}\-?\d{2}$/
   end
 
+  def contact?
+    !email.nil? || !phone.nil? || !telegram.nil?
+  end
+  def validate
+    !git.nil? && contact?
+  end
   def self.is_val_email?(email)
     email =~ /^[a-zA-Z\d\.]+@[a-z\d\.]+/
   end
