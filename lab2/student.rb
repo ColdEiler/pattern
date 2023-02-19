@@ -1,7 +1,7 @@
 class Student
   #сеттеры и гетторы
   attr_accessor  :id
-  attr_reader :phone, :telegram, :email, :git,:lastname, :firstname, :father_name,
+  attr_reader :phone, :telegram, :email, :git,:lastname, :firstname, :father_name
 
   #validation
   def self.is_val_phone?(phone)
@@ -13,11 +13,11 @@ class Student
   end
 
   def self.is_val_git?(git)
-    git=~ /[A-Za-z0-9-_]+$/
+    git=~ /[A-Za-z \d\-]+$/
   end
 
   def self.is_val_telegram?(telegram)
-    telegram =~ /@[A-Za-z0-9-_]+$/
+    telegram =~ /^@[A-Za-z0-9_\-]+$/
   end
 
   def self.is_val_name?(name)
