@@ -1,3 +1,4 @@
+require 'json'
 class Student
   #сеттеры и гетторы
   attr_accessor  :id
@@ -88,6 +89,28 @@ class Student
     res
   end
 
+  #метод создающий объект из строки
+  def self.from_json(str)
+    options = JSON.parse(str)
+    firstname = options["firstname"]
+    lastname = options["lastname"]
+    father_name = options["father_name"]
+    raise ArgumentError, "У вас проблема с обязательными полями !!!" if firstname.nil? || lastname.nil? || father_name.nil?
+
+    Student.new(lastname,firstname,father_name,id:options["id"],phone:options["phone"],
+                telegram:options["telegram"],email: options["email"],git:options["git"])
+  end
+
+  # метод представляющий объект в виде строки
+  def to_json
+    options={}
+    [:lastname,:firstname,:father_name,:id,:phone, :telegram,
+     :email,:git].each do |attr|
+      attr_val = send(attr)
+      options[attr] = attr_val unless attr_val.nil?
+    end
+    JSON.generate(options)
+  end
 end
 
 
