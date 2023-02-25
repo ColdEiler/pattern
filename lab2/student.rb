@@ -111,6 +111,32 @@ class Student
     end
     JSON.generate(options)
   end
+
+  # метод возвращающий ФИО
+  def get_FIO
+    "#{lastname} #{firstname[0]} #{father_name[0]}"
+  end
+
+  # Метод возвращающий git либо nil
+  def get_git
+    return "git: #{git}"unless git.nil?
+    nil
+  end
+
+  # Метод возвращающий один из контактов связи либо nil
+  def get_concats
+    return " telegram:#{telegram}" unless telegram.nil?
+    return " email: #{email}" unless email.nil?
+    return " phone: #{phone}" unless phone.nil?
+    nil
+  end
+  # Метод возвращающий краткую инфу об объекте
+  def get_info
+    infa = get_FIO
+    infa += get_concats unless get_concats.nil?
+    infa+=get_git unless get_git.nil?
+    infa
+  end
 end
 
 
