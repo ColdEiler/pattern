@@ -114,7 +114,7 @@ class Student
 
   # метод возвращающий ФИО
   def get_FIO
-    "#{lastname} #{firstname[0]} #{father_name[0]}"
+    "lastname_initials: #{lastname} #{firstname[0]} #{father_name[0]}"
   end
 
   # Метод возвращающий git либо nil
