@@ -97,7 +97,7 @@ class Student
     father_name = options["father_name"]
     raise ArgumentError, "У вас проблема с обязательными полями !!!" if firstname.nil? || lastname.nil? || father_name.nil?
 
-    Student.new(lastname,firstname,father_name,id:options["id"],phone:options["phone"],
+    Student.new(lastname:lastname,firstname:firstname,father_name:father_name,id:options["id"],phone:options["phone"],
                 telegram:options["telegram"],email: options["email"],git:options["git"])
   end
 
