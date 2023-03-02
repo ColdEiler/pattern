@@ -1,44 +1,19 @@
 require 'json'
-class Student
-  #сеттеры и гетторы
-  attr_accessor  :id
-  attr_reader :phone, :telegram, :email, :git,:lastname, :firstname, :father_name
+require_relative 'student_abstract'
+class Student < Student_basis
+  # Делаем Student_basis публичным
+  public_class_method :new
 
-  #validation
-  def self.is_val_phone?(phone)
-    phone =~ /^\+?[7|8].?\(?\d{3}\)?\-?\d{3}\-?\d{2}\-?\d{2}$/
-  end
+  # Делаем публичными геттеры и сеттеры абстрактного класса
+  public :phone, :telegram, :email, 'id=', 'phone=', 'telegram=', 'email=', 'git='
+  # Стандартные геттеры для полей
+  attr_reader :last_name, :first_name, :father_name
 
-  def contact?
-    !email.nil? || !phone.nil? || !telegram.nil?
-  end
-  def validate?
-    !git.nil? && contact?
-  end
-  def self.is_val_email?(email)
-    email =~ /^[a-zA-Z\d\.]+@[a-z\d\.]+/
-  end
-
-  def self.is_val_git?(git)
-    git=~ /[A-Za-z \d\-]+$/
-  end
-
-  def self.is_val_telegram?(telegram)
-    telegram =~ /^@[A-Za-z0-9_\-]+$/
-  end
-
-  def self.is_val_name?(name)
-    name=~/^[А-Я][а-я]+/
-  end
-  def initialize(lastname:, firstname:,father_name:, id:nil, phone:nil, telegram:nil, email:nil, git:nil)
+  def initialize(lastname:, firstname:,father_name:)
     self.lastname=lastname
     self.firstname=firstname
     self.father_name = father_name
-    self.id= id
-    self.phone = phone
-    self.telegram = telegram
-    self.email = email
-    self.git = git
+    super(id:id,phone:phone,telegram: telegram, email:email,git:git)
   end
 
 
@@ -56,22 +31,6 @@ class Student
   def father_name=(father_name)
     raise ArgumentError,"Некорретный ввод: father_name = #{father_name} !!!" unless Student.is_val_name?(father_name) || father_name.nil?
     @father_name = father_name
-  end
-  def phone=(phone)
-    raise ArgumentError,"Некорретный ввод: phone = #{phone}!!!" unless Student.is_val_phone?(phone) || phone.nil?
-    @phone = phone
-  end
-  def email=(email)
-    raise ArgumentError,"Некорретный ввод: email = #{email} !!!" unless Student.is_val_email?(email) || email.nil?
-    @email = email
-  end
-  def telegram=(telegram)
-    raise ArgumentError,"Некорретный ввод: telegram = #{telegram} !!!" unless Student.is_val_telegram?(telegram) || telegram.nil?
-    @telegram = telegram
-  end
-  def git=(git)
-    raise ArgumentError,"Некорретный ввод: git = #{git} !!!" unless Student.is_val_git?(git) || git.nil?
-    @git = git
   end
 
   def set_contacts(contacts)
@@ -97,8 +56,7 @@ class Student
     father_name = options["father_name"]
     raise ArgumentError, "У вас проблема с обязательными полями !!!" if firstname.nil? || lastname.nil? || father_name.nil?
 
-    Student.new(lastname:lastname,firstname:firstname,father_name:father_name,id:options["id"],phone:options["phone"],
-                telegram:options["telegram"],email: options["email"],git:options["git"])
+    Student.new(lastname:lastname,firstname:firstname,father_name:father_name,)
   end
 
   # метод представляющий объект в виде строки
@@ -112,13 +70,6 @@ class Student
     JSON.generate(options)
   end
 
-
-  # Метод возвращающий git либо nil
-  def get_git
-    return "git: #{git}"unless git.nil?
-    nil
-  end
-
   # Метод возвращающий один из контактов связи либо nil
   def get_concats
     return " telegram:#{telegram}" unless telegram.nil?
@@ -126,6 +77,7 @@ class Student
     return " phone: #{phone}" unless phone.nil?
     nil
   end
+
   # Метод возвращающий краткую инфу об объекте
   def get_info
     infa = "lastname_initials: #{lastname} #{firstname[0]} #{father_name[0]}"
