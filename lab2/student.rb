@@ -30,7 +30,7 @@ class Student
   def self.is_val_name?(name)
     name=~/^[А-Я][а-я]+/
   end
-  def initialize(lastname, firstname,father_name, id:nil, phone:nil, telegram:nil, email:nil, git:nil)
+  def initialize(lastname:, firstname:,father_name:, id:nil, phone:nil, telegram:nil, email:nil, git:nil)
     self.lastname=lastname
     self.firstname=firstname
     self.father_name = father_name
