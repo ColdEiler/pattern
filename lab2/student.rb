@@ -12,7 +12,7 @@ class Student
   def contact?
     !email.nil? || !phone.nil? || !telegram.nil?
   end
-  def validate
+  def validate?
     !git.nil? && contact?
   end
   def self.is_val_email?(email)
