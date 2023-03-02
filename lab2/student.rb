@@ -112,10 +112,6 @@ class Student
     JSON.generate(options)
   end
 
-  # метод возвращающий ФИО
-  def get_FIO
-    "lastname_initials: #{lastname} #{firstname[0]} #{father_name[0]}"
-  end
 
   # Метод возвращающий git либо nil
   def get_git
@@ -132,7 +128,7 @@ class Student
   end
   # Метод возвращающий краткую инфу об объекте
   def get_info
-    infa = get_FIO
+    infa = "lastname_initials: #{lastname} #{firstname[0]} #{father_name[0]}"
     infa += get_concats unless get_concats.nil?
     infa+=get_git unless get_git.nil?
     infa
