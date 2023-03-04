@@ -9,7 +9,7 @@ class Student < Student_basis
   # Стандартные геттеры для полей
   attr_reader :last_name, :first_name, :father_name
 
-  def initialize(lastname:, firstname:,father_name:)
+  def initialize(lastname:, firstname:,father_name:,id:nil,phone:nil,git:nil,telegram:nil,email:nil)
     self.lastname=lastname
     self.firstname=firstname
     self.father_name = father_name

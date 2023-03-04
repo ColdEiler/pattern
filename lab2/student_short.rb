@@ -1,8 +1,9 @@
-require_relative 'student'
+require_relative 'student_abstract'
 
-class Student_short<Student
+class Student_short<Student_basis
   attr_accessor :lastname_initials,:contact,:id,:git
 
+  public_class_method :new
   def self.from_student(student)
     raise ArgumentError,"Нет ID" if student.id.nil?
     Student_short.new(student.id, student.get_info)
@@ -16,6 +17,8 @@ class Student_short<Student
     self.lastname_initials = options[:lastname_initials]
     self.contact = options[:contact]
     self.git = options[:git]
+
+    super(id:self.id,git:self.git)
   end
 
   def to_s
