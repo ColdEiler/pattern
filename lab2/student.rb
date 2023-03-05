@@ -78,9 +78,9 @@ class Student < Student_basis
 
   # Метод возвращающий один из контактов связи либо nil
   def get_concats
-    return " telegram:#{telegram}" unless telegram.nil?
-    return " email: #{email}" unless email.nil?
-    return " phone: #{phone}" unless phone.nil?
+    return "telegram:#{telegram}" unless telegram.nil?
+    return "email: #{email}" unless email.nil?
+    return "phone: #{phone}" unless phone.nil?
     nil
   end
 
@@ -90,7 +90,7 @@ class Student < Student_basis
     info[:lastname_initials] = "#{lastname} #{firstname[0]} #{father_name[0]}"
     info[:git] = git unless git.nil?
     info[:contact] = get_concats unless get_concats.nil?
-    info
+    JSON.generate(info)
   end
 end
 
