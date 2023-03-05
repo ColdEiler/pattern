@@ -9,5 +9,5 @@ student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владисла
 #puts student_3
 #puts student_3.get_info
 #student_1.from_json('{"lastname":"Минаков","firstname":"Владислав","father_name":"Андреевич", "id": 1, "phone":"79667665060"}')
-
-st = Student_short.new(id:1,str:"lastname_initials: 'Minakov V A', git:'Cold_Euler',concat: 'phone: '79667665060''")
+# st = Student_short.from_student(student_1)
+# puts st

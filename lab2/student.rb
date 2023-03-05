@@ -7,7 +7,7 @@ class Student < Student_basis
   # Делаем публичными геттеры и сеттеры абстрактного класса
   public :phone, :telegram, :email, 'id=', 'phone=', 'telegram=', 'email=', 'git='
   # Стандартные геттеры для полей
-  attr_reader :last_name, :first_name, :father_name
+  attr_reader :lastname, :firstname, :father_name
 
   def initialize(lastname:, firstname:,father_name:,id:nil,phone:nil,git:nil,telegram:nil,email:nil)
     self.lastname=lastname
@@ -56,7 +56,13 @@ class Student < Student_basis
     father_name = options["father_name"]
     raise ArgumentError, "У вас проблема с обязательными полями !!!" if firstname.nil? || lastname.nil? || father_name.nil?
 
-    Student.new(lastname:lastname,firstname:firstname,father_name:father_name,)
+    phone = options["phone"]
+    git = options["git"]
+    email = options["git"]
+    telegram = options["telegram"]
+    id = options["id"]
+
+    Student.new(lastname:lastname,firstname:firstname,father_name:father_name,id:id,git:git,email:email,telegram:telegram,phone:phone)
   end
 
   # метод представляющий объект в виде строки
@@ -80,10 +86,11 @@ class Student < Student_basis
 
   # Метод возвращающий краткую инфу об объекте
   def get_info
-    infa = "lastname_initials: #{lastname} #{firstname[0]} #{father_name[0]}"
-    infa += get_concats unless get_concats.nil?
-    infa+=get_git unless get_git.nil?
-    infa
+    info={}
+    info[:lastname_initials] = "#{lastname} #{firstname[0]} #{father_name[0]}"
+    info[:git] = git unless git.nil?
+    info[:contact] = get_concats unless get_concats.nil?
+    info
   end
 end
 
