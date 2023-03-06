@@ -5,6 +5,6 @@ student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владисла
 #student_3 = Student.new('Головий','Виталий','Александрович',{git:'https://github.com/VitalijGolovi',id:3})
 #a = student_1.to_json
 #student_3 = Student.from_json(a)
-#puts student_3
+puts student_1
 st = Student_short.from_student(student_1)
 puts st

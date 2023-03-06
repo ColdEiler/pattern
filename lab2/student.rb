@@ -5,9 +5,23 @@ class Student < Student_basis
   public_class_method :new
 
   # Делаем публичными геттеры и сеттеры абстрактного класса
-  public :phone, :telegram, :email, 'id=', 'phone=', 'telegram=', 'email=', 'git='
+  public  'git=','get_concats','id='
   # Стандартные геттеры для полей
-  attr_reader :lastname, :firstname, :father_name
+  attr_reader :lastname, :firstname, :father_name,:phone, :telegram, :email
+  def self.is_val_email?(email)
+    email =~ /^[a-zA-Z\d\.]+@[a-z\d\.]+/
+  end
+
+  def self.is_val_telegram?(telegram)
+    telegram =~ /^@[A-Za-z0-9_\-]+$/
+  end
+
+  def self.is_val_name?(name)
+    name=~/^[А-Я][а-я]+/
+  end
+  def self.is_val_phone?(phone)
+    phone =~ /^\+?[7|8].?\(?\d{3}\)?\-?\d{3}\-?\d{2}\-?\d{2}$/
+  end
 
   def initialize(lastname:, firstname:,father_name:,id:nil,phone:nil,git:nil,telegram:nil,email:nil)
     self.lastname=lastname
@@ -15,7 +29,19 @@ class Student < Student_basis
     self.father_name = father_name
     super(id:id,phone:phone,telegram: telegram, email:email,git:git)
   end
-
+  #setter
+  def phone=(phone)
+    raise ArgumentError,"Некорретный ввод: phone = #{phone}!!!" unless Student.is_val_phone?(phone) || phone.nil?
+    @phone = phone
+  end
+  def email=(email)
+    raise ArgumentError,"Некорретный ввод: email = #{email} !!!" unless Student.is_val_email?(email) || email.nil?
+    @email = email
+  end
+  def telegram=(telegram)
+    raise ArgumentError,"Некорретный ввод: telegram = #{telegram} !!!" unless Student.is_val_telegram?(telegram) || telegram.nil?
+    @telegram = telegram
+  end
 
   #setter
   def lastname=(lastname)
@@ -76,13 +102,6 @@ class Student < Student_basis
     JSON.generate(options)
   end
 
-  # Метод возвращающий один из контактов связи либо nil
-  def get_concats
-    return "telegram:#{telegram}" unless telegram.nil?
-    return "email: #{email}" unless email.nil?
-    return "phone: #{phone}" unless phone.nil?
-    nil
-  end
 
   # Метод возвращающий краткую инфу об объекте
   def get_info
