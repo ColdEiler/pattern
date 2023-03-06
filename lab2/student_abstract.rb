@@ -49,10 +49,6 @@ class Student_basis
     nil
   end
 
-  def get_git
-    return "git: #{git}"unless git.nil?
-    nil
-  end
 
   # Метод возвращающий один из контактов связи либо nil
 
