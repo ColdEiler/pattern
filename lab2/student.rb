@@ -7,7 +7,7 @@ class Student < Student_basis
   # Делаем публичными геттеры и сеттеры абстрактного класса
   public  'git=','get_concats','id='
   # Стандартные геттеры для полей
-  attr_reader :lastname, :firstname, :father_name,:phone, :telegram, :email
+  attr_reader :lastname, :firstname, :father_name
   def self.is_val_email?(email)
     email =~ /^[a-zA-Z\d\.]+@[a-z\d\.]+/
   end
