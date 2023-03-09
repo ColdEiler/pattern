@@ -12,7 +12,7 @@ class Student_basis
   end
 
 
-  protected
+  private
   attr_reader :phone, :telegram, :email
 
   public

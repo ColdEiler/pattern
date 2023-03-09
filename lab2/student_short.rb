@@ -7,10 +7,10 @@ class Student_short<Student_basis
 
   public_class_method :new
   private
-  attr_writer :lastname_initials,:contact,:id,:git
+  attr_writer :lastname_initials,:contact
 
   public
-  attr_reader :lastname_initials,:contact,:id,:git
+  attr_reader :lastname_initials,:contact
   def self.from_student(student)
     raise ArgumentError,"Нет ID" if student.id.nil?
     Student_short.new(student.id, student.get_info)
