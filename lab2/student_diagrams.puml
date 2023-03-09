@@ -57,10 +57,10 @@ class Student_short extends Student_basis{
      {static}from_student(Student): ShortStudent
      +initialize(Integer, String)
      +to_s(): String
-     .. Геттеры ..
+     .. getters ..
      +lastname_and_initials(): String
      +contact(): Hash
-     .. Сеттеры ..
+     .. setters ..
      -lastname_and_initials=(String)
      -contact=(Hash)
 }
