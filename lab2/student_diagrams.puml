@@ -1,28 +1,40 @@
 @startuml
-'https://plantuml.com/class-diagram
+'https://plantuml.com/class-diagram'
 
-class Student{
+abstract class Student_basis{
      -id: Integer
-     -last_name: String
-     -first_name: String
-     -father_name: String
      -phone: String
      -telegram: String
      -email: String
      -git: String
 --
-     +{static}is_val_name?(String): Boolean
-     +{static}is_val_phone?(String): Boolean
      +{static}is_val_git?(String): Boolean
-     +{static}is_val_telegram?(String): Boolean
-     +{static}is_val_email?(String): Boolean
-     +initialize(String, String, String, Hash)
+     +initialize(Hash)
      +contact?(): Boolean
      +validate(): Boolean
+     +get_concats(): String
+     .. getters..
+     git(): String
+     .. setters ..
+     +git(): String
+     +id():Integer
+}
+
+class Student extends Student_basis{
+     -lastname: String
+     -firstname: String
+     -father_name: String
+     +{static}from_json(String):Student
+     +{static}is_val_name?(String): Boolean
+     +{static}is_val_phone?(String): Boolean
+     +{static}is_val_telegram?(String): Boolean
+     +{static}is_val_email?(String): Boolean
+     +initialize(Hash)
      +set_contacts(Hash)
      +to_s(): String
+     +get_info(): String
+     +to_json():String
      .. getters ..
-     +git(): String
      +phone(): String
      +telegram(): String
      +email(): String
@@ -30,13 +42,26 @@ class Student{
      +first_name(): String
      +father_name(): String
      .. setters ..
-     +git=(String)
      +phone=(String)
      +telegram=(String)
      +email=(String)
      +last_name=(String)
      +first_name=(String)
      +father_name=(String)
+
+}
+
+class Student_short extends Student_basis{
+     -lastname_and_initials: String
+     -contact: Hash
+     {static}from_student(Student): ShortStudent
+     +initialize(Integer, String)
+     +to_s(): String
+     .. Геттеры ..
+     +lastname_and_initials(): String
+     +contact(): Hash
+     .. Сеттеры ..
+     -lastname_and_initials=(String)
+     -contact=(Hash)
 }
 @enduml
-
