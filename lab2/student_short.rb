@@ -6,8 +6,6 @@ class Student_short<Student_basis
 
 
   public_class_method :new
-  private
-  attr_writer :lastname_initials,:contact
 
   public
   attr_reader :lastname_initials,:contact
