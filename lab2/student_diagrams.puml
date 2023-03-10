@@ -34,6 +34,8 @@ class Student extends Student_basis{
      +to_s(): String
      +get_info(): String
      +to_json():String
+     +read_from_txt(String)):Array
+     +write_to_txt(String,Array)
      .. getters ..
      +phone(): String
      +telegram(): String
@@ -52,16 +54,15 @@ class Student extends Student_basis{
 }
 
 class Student_short extends Student_basis{
-     -lastname_and_initials: String
-     -contact: Hash
+     +lastname_and_initials: String
+     +contact: String
      {static}from_student(Student): ShortStudent
      +initialize(Integer, String)
      +to_s(): String
      .. getters ..
-     +lastname_and_initials(): String
-     +contact(): Hash
+     +lastname_and_initials():String
+     +contact():String
      .. setters ..
-     -lastname_and_initials=(String)
-     -contact=(Hash)
+
 }
 @enduml
