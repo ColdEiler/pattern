@@ -102,6 +102,12 @@ class Student < Student_basis
     end
     student_list
   end
+
+  def self.write_to_txt(filepath,student_list)
+    file = File.new(filepath,"w")
+    student_list.each { |student| file.write("#{student.to_json}\n") }
+    file.close
+  end
   # метод представляющий объект в виде строки
   def to_json
     options={}
