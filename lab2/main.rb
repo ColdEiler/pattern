@@ -11,3 +11,4 @@ student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владисла
 #puts st
 student_list = Student.read_from_txt("C:\\Users\\Владислав\\RubymineProjects\\labs\\lab2\\read_students.txt")
 student_list.each { |student| puts student.get_info }
+Student.write_to_txt("C:\\Users\\Владислав\\RubymineProjects\\labs\\lab2\\write_students.txt",student_list)
