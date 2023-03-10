@@ -84,13 +84,24 @@ class Student < Student_basis
 
     phone = options["phone"]
     git = options["git"]
-    email = options["git"]
+    email = options["email"]
     telegram = options["telegram"]
     id = options["id"]
 
     Student.new(lastname:lastname,firstname:firstname,father_name:father_name,id:id,git:git,email:email,telegram:telegram,phone:phone)
   end
 
+  def self.read_from_txt(filepath)
+    student_list=[]
+    if File.exist?(filepath)
+      file = File.new(filepath,"r:UTF-8")
+      content = file.readlines
+      content.each { |str| student_list<<from_json(str) }
+    else
+      raise ArgumentError,"Путь к файлу: #{filepath} не существует"
+    end
+    student_list
+  end
   # метод представляющий объект в виде строки
   def to_json
     options={}
