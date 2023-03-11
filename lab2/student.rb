@@ -35,6 +35,11 @@ class Student < Student_basis
     self.lastname=lastname
     self.firstname=firstname
     self.father_name = father_name
+    self.phone = phone
+    self.git = git
+    self.id = id
+    self.telegram = telegram
+    self.email = email
     super(id:id,git:git)
   end
   #setter
