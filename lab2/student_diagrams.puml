@@ -55,13 +55,12 @@ class Student extends Student_basis{
 
 class Student_short extends Student_basis{
      +lastname_and_initials: String
-     +contact: String
      {static}from_student(Student): ShortStudent
      +initialize(Integer, String)
+     +short_concats():String
      +to_s(): String
      .. getters ..
      +lastname_and_initials():String
-     +contact():String
      .. setters ..
 
 }

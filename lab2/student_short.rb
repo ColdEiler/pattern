@@ -8,7 +8,8 @@ class Student_short<Student_basis
   public_class_method :new
 
   public
-  attr_reader :lastname_initials,:contact
+  attr_reader :lastname_initials
+
   def self.from_student(student)
     raise ArgumentError,"Нет ID" if student.id.nil?
     Student_short.new(student.id, student.get_info)
@@ -19,20 +20,21 @@ class Student_short<Student_basis
     raise ArgumentError, "Нет ФИО!!!" if options[:lastname_initials].nil?
 
     self.id = id
-    self.lastname_initials = options[:lastname_initials]
-    self.contact = options[:contact]
+    @lastname_initials = options[:lastname_initials]
     self.git = options[:git]
-    phone = options["phone"]
-    email = options["email"]
-    telegram = options["telegram"]
-    super(id:self.id,git:self.git,phone:phone,email:email,telegram:telegram)
+
+  end
+
+  def concats_short
+    get_concats
   end
 
   def to_s
     res = lastname_initials
-    [:contact,:git,:id].each do |option|
+    [:git,:id].each do |option|
       opt_val = send(option)
       res+= " #{option}: #{opt_val}" unless opt_val.nil?
+      res+="concat: #{get_concats}"
     end
     res
   end
