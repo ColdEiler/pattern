@@ -8,11 +8,8 @@ class Student_basis
   public
   attr_reader :id
   attr_reader :git
-  def initialize( id:nil, phone:nil, telegram:nil, email:nil, git:nil)
+  def initialize( id:nil, git:nil)
     self.id= id
-    @phone = phone
-    @telegram = telegram
-    @email = email
     self.git = git
   end
 

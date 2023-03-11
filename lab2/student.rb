@@ -35,7 +35,7 @@ class Student < Student_basis
     self.lastname=lastname
     self.firstname=firstname
     self.father_name = father_name
-    super(id:id,phone:phone,telegram: telegram, email:email,git:git)
+    super(id:id,git:git)
   end
   #setter
   def phone=(phone)
