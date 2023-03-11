@@ -3,18 +3,13 @@
 
 abstract class Student_basis{
      -id: Integer
-     -phone: String
-     -telegram: String
-     -email: String
      -git: String
 --
      +{static}is_val_git?(String): Boolean
      +initialize(Hash)
-     +contact?(): Boolean
-     +validate(): Boolean
-     +get_concats(): String
      .. getters..
      git(): String
+     id():String
      .. setters ..
 
 }
@@ -23,11 +18,19 @@ class Student extends Student_basis{
      -lastname: String
      -firstname: String
      -father_name: String
+     -telegram:String
+     -email:String
+     -phone:String
+
      +{static}from_json(String):Student
      +{static}is_val_name?(String): Boolean
      +{static}is_val_phone?(String): Boolean
      +{static}is_val_telegram?(String): Boolean
      +{static}is_val_email?(String): Boolean
+     +contact?(): Boolean
+     +validate(): Boolean
+     +get_concats(): String
+
      +initialize(Hash)
      +set_contacts(Hash)
      +to_s(): String
