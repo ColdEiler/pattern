@@ -16,8 +16,7 @@ abstract class Student_basis{
      .. getters..
      git(): String
      .. setters ..
-     +git(): String
-     +id():Integer
+
 }
 
 class Student extends Student_basis{
