@@ -5,9 +5,17 @@ class Student < Student_basis
   public_class_method :new
 
   # Делаем публичными геттеры и сеттеры абстрактного класса
-  public  'git=','get_concats','id='
+  public  'git=','id='
   # Стандартные геттеры для полей
-  attr_reader :lastname, :firstname, :father_name
+  attr_reader :lastname, :firstname, :father_name,:phone, :telegram, :email
+
+  def contact?
+    !email.nil? || !phone.nil? || !telegram.nil?
+  end
+  def validate?
+    !git.nil? && contact?
+  end
+
   def self.is_val_email?(email)
     email =~ /^[a-zA-Z\d\.]+@[a-z\d\.]+/
   end
@@ -73,6 +81,14 @@ class Student < Student_basis
     res+= " git = #{self.git}" unless git.nil?
     res
   end
+
+  def get_concats
+    return " telegram:#{telegram}" unless telegram.nil?
+    return " email: #{email}" unless email.nil?
+    return " phone: #{phone}" unless phone.nil?
+    nil
+  end
+
 
   #метод создающий объект из строки
   def self.from_json(str)

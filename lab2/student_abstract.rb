@@ -1,19 +1,9 @@
 class Student_basis
   private_class_method :new
-  def contact?
-    !email.nil? || !phone.nil? || !telegram.nil?
-  end
-  def validate?
-    !git.nil? && contact?
-  end
 
   def self.is_val_git?(git)
     git=~ /[A-Za-z \d\-]+$/
   end
-
-
-  private
-  attr_reader :phone, :telegram, :email
 
   public
   attr_reader :id
@@ -24,13 +14,6 @@ class Student_basis
     @telegram = telegram
     @email = email
     self.git = git
-  end
-
-  def get_concats
-    return " telegram:#{telegram}" unless telegram.nil?
-    return " email: #{email}" unless email.nil?
-    return " phone: #{phone}" unless phone.nil?
-    nil
   end
 
 
