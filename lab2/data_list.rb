@@ -17,6 +17,7 @@ class DataList
     id_list
   end
 
+  protected
   def get_names
     []
   end
