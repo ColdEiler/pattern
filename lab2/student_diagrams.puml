@@ -4,40 +4,41 @@
 abstract class Student_basis{
      -id: Integer
      -git: String
+     -email:String
+     -telegram:String
+     -phone:String
+     -contact:String
 --
-     +{static}is_val_git?(String): Boolean
      +initialize(Hash)
+     +contact?(): Boolean
+     +validate?(): Boolean
+     +get_contacts(): String
      .. getters..
      git(): String
      id():String
      .. setters ..
-
+     id=(Integer)
 }
 
 class Student extends Student_basis{
      -lastname: String
      -firstname: String
      -father_name: String
-     -telegram:String
-     -email:String
-     -phone:String
 
      +{static}from_json(String):Student
      +{static}is_val_name?(String): Boolean
      +{static}is_val_phone?(String): Boolean
      +{static}is_val_telegram?(String): Boolean
      +{static}is_val_email?(String): Boolean
-     +contact?(): Boolean
-     +validate(): Boolean
-     +get_concats(): String
+     +{static}is_val_git?(String): Boolean
 
      +initialize(Hash)
      +set_contacts(Hash)
      +to_s(): String
      +get_info(): String
      +to_json():String
-     +read_from_txt(String)):Array
-     +write_to_txt(String,Array)
+     +{static}read_from_txt(String)):Array
+     +{static}write_to_txt(String,Array)
      .. getters ..
      +phone(): String
      +telegram(): String
@@ -46,6 +47,7 @@ class Student extends Student_basis{
      +first_name(): String
      +father_name(): String
      .. setters ..
+     +git=(String)
      +phone=(String)
      +telegram=(String)
      +email=(String)
@@ -57,10 +59,11 @@ class Student extends Student_basis{
 
 class Student_short extends Student_basis{
      +lastname_and_initials: String
-     +contact
+     +contact:String
+     +id: Integer
+     +git: String
      {static}from_student(Student): ShortStudent
      +initialize(Integer, String)
-     +short_concats():String
      +to_s(): String
      .. getters ..
      +lastname_and_initials():String
