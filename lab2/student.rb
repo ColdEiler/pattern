@@ -5,20 +5,18 @@ class Student < Student_basis
   public_class_method :new
 
   # Делаем публичными геттеры и сеттеры абстрактного класса
-  public  'git=','id='
+  public 'id='
   # Стандартные геттеры для полей
-  attr_reader :lastname, :firstname, :father_name,:phone, :telegram, :email
-
-  def contact?
-    !email.nil? || !phone.nil? || !telegram.nil?
-  end
-  def validate?
-    !git.nil? && contact?
-  end
+  attr_reader :lastname, :firstname, :father_name
 
   def self.is_val_email?(email)
     email =~ /^[a-zA-Z\d\.]+@[a-z\d\.]+/
   end
+
+  def self.is_val_git?(git)
+    git=~ /[A-Za-z \d\-]+$/
+  end
+
 
   def self.is_val_telegram?(telegram)
     telegram =~ /^@[A-Za-z0-9_\-]+$/
@@ -40,7 +38,7 @@ class Student < Student_basis
     self.id = id
     self.telegram = telegram
     self.email = email
-    super(id:id,git:git)
+    super(id:id,git:git,email:email,telegram:telegram,phone:phone)
   end
   #setter
   def phone=(phone)
@@ -55,7 +53,10 @@ class Student < Student_basis
     raise ArgumentError,"Некорретный ввод: telegram = #{telegram} !!!" unless Student.is_val_telegram?(telegram) || telegram.nil?
     @telegram = telegram
   end
-
+  def git=(git)
+    raise ArgumentError,"Некорретный ввод: git = #{git} !!!" unless Student.is_val_git?(git) || git.nil?
+    @git = git
+  end
   #setter
   def lastname=(lastname)
     raise ArgumentError,"Некорретный ввод: lastname = #{lastname} !!!" unless Student.is_val_name?(lastname) || lastname.nil?
@@ -86,14 +87,6 @@ class Student < Student_basis
     res+= " git = #{self.git}" unless git.nil?
     res
   end
-
-  def get_concats
-    return " telegram:#{telegram}" unless telegram.nil?
-    return " email: #{email}" unless email.nil?
-    return " phone: #{phone}" unless phone.nil?
-    nil
-  end
-
 
   #метод создающий объект из строки
   def self.from_json(str)
@@ -146,7 +139,7 @@ class Student < Student_basis
     info={}
     info[:lastname_initials] = "#{lastname} #{firstname[0]} #{father_name[0]}"
     info[:git] = git unless git.nil?
-    info[:contact] = get_concats unless get_concats.nil?
+    info[:contact] = contact unless contact.nil?
     JSON.generate(info)
   end
 end
