@@ -9,17 +9,17 @@ class Student_basis
 
 
   protected
-  attr_reader :phone, :telegram, :email, :contact
+  attr_reader :phone, :telegram, :email
 
   public
   attr_reader :id
-  attr_reader :git
-  def initialize( id:nil, phone:nil, telegram:nil, email:nil, git:nil,contact:nil)
+  attr_accessor :git
+  def initialize( id:nil, phone:nil, telegram:nil, email:nil, git:nil)
     self.id= id
+
     @phone = phone
     @telegram = telegram
     @email = email
-    @contact = get_contacts
     self.git = git
 
   end

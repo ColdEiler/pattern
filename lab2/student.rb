@@ -139,7 +139,7 @@ class Student < Student_basis
     info={}
     info[:lastname_initials] = "#{lastname} #{firstname[0]} #{father_name[0]}"
     info[:git] = git unless git.nil?
-    info[:contact] = contact unless contact.nil?
+    info[:contact] = get_contacts unless get_contacts.nil?
     JSON.generate(info)
   end
 end

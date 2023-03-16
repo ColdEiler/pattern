@@ -7,9 +7,11 @@ student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владисла
 #a = student_1.to_json
 #student_3 = Student.from_json(a)
 #puts a
-puts student_1
+#puts student_1
 st = Student_short.from_student(student_1)
-puts st
+st_1 = Student_short.new(1,student_1.get_info)
+puts st_1.get_contacts
+
 # student_list = Student.read_from_txt("C:\\Users\\Владислав\\RubymineProjects\\labs\\lab2\\read_students.txt")
 # student_list.each { |student| puts student.get_info }
 # Student.write_to_txt("C:\\Users\\Владислав\\RubymineProjects\\labs\\lab2\\write_students.txt",student_list)
