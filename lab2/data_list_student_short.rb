@@ -11,20 +11,10 @@ class Data_list_Student_Short < DataList
     ["lastname_initials", "git", "contact"]
   end
 
-  def get_data
-    data = []
-    row_count = 0
-    list.each do
-      |object|
-      data<<row_count
-      data<<object.lastname_initials
-      data<<object.git
-      data<<object.contact
+  protected
 
-      row_count+=1
-    end
-    DataTable.new(data)
+  def get_fields_from_datatable(object)
+    [object.lastname_initials,object.git,object.contact]
   end
-
 
 end

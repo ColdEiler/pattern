@@ -7,22 +7,36 @@ class DataList
   end
 
   def select(id)
-    return selected_objects.<< id  if id < list.size
+    return selected_objects<< id  if id < list.size
     nil
   end
 
   def get_selected
     id_list=[]
-    list.each{|object| id_list << object.id }
+    selected_objects.each{|id| id_list << id }
     id_list
   end
 
+  #template_method
+  def get_data
+    data = []
+    row_count = 0
+    list.each do
+    |object|
+      row = []
+      row<<row_count
+      row.push(*get_fields_from_datatable(object))
+      data<<row
+      row_count+=1
+    end
+    DataTable.new(data)
+  end
   protected
   def get_names
     []
   end
-
-  def get_data
+  #реализация в потомках
+  def get_fields_from_datatable(object)
     []
   end
 
