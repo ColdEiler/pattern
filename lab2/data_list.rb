@@ -42,6 +42,7 @@ class DataList
   end
 
   private
-  attr_reader :list,:selected_objects
+  attr_reader :list
+  attr_accessor :selected_objects
 
 end
