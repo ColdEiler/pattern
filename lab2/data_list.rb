@@ -1,6 +1,7 @@
 class DataList
   private_class_method :new
 
+  attr_writer :list
   def initialize(collection)
     self.list = collection
     self.selected_objects = []
@@ -41,6 +42,6 @@ class DataList
   end
 
   private
-  attr_accessor :list,:selected_objects
+  attr_reader :list,:selected_objects
 
 end
