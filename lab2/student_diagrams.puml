@@ -1,6 +1,5 @@
 @startuml
-'https://plantuml.com/class-diagram'
-
+'https://plantuml.com/class-diagram
 abstract class Student_basis{
      -id: Integer
      -git: String
@@ -71,4 +70,49 @@ class Student_short extends Student_basis{
      .. setters ..
 
 }
+
+
+class DataTable{
+    -table : Array
+    -rows_count: Integer
+    -cols_count: Integer
+    __
+    +initialize(Array)
+    +get_item(Integer,Integer): Object
+    __
+    +rows_count: Integer
+    +cols_count: Integer
+    -table: Array
+    __
+    -rows_count
+    -cols_count
+    -table
+}
+abstract class DataList{
+    -list : Array
+    -selected_objects: Array
+    __
+    -initialize(Array)
+    +select(Integer)
+    +get_selected(): Array<Integer>
+    +get_data(): DataTable
+    #get_names()
+    #get_fields_datatable(objects)
+
+    __
+    -objects_list: Array
+    -selected_objects: Array
+    __
+    +objects_list: Array
+    -selected_objects: Array
+}
+
+class DataListStudentShort extends DataList{
+    --
+    +initialize(Array)
+    +get_names(): Array
+    #get_fields_datatable(): Array<String>
+}
+
+DataList ..> DataTable
 @enduml
