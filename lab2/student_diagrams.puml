@@ -74,19 +74,19 @@ class Student_short extends Student_basis{
 
 class DataTable{
     -table : Array
-    -rows_count: Integer
+    +rows_count: Integer
     -cols_count: Integer
     __
     +initialize(Array)
     +get_item(Integer,Integer): Object
-    __
+    __getters__
     +rows_count: Integer
     +cols_count: Integer
     -table: Array
-    __
+    __setters__
     -rows_count
     -cols_count
-    -table
+    -table=(Array)
 }
 abstract class DataList{
     -list : Array
@@ -99,11 +99,11 @@ abstract class DataList{
     #get_names()
     #get_fields_datatable(objects)
 
-    __
-    -objects_list: Array
+    __getters__
+    -list: Array
     -selected_objects: Array
-    __
-    +objects_list: Array
+    __setters__
+    +list: Array
     -selected_objects: Array
 }
 
@@ -115,4 +115,5 @@ class DataListStudentShort extends DataList{
 }
 
 DataList ..> DataTable
+DataListStudentShort o-- Student_short
 @enduml
