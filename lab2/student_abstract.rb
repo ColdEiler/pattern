@@ -7,8 +7,7 @@
       !git.nil? && contact?
     end
 
-
-    protected
+    public
     attr_reader :phone, :telegram, :email, :contact
 
     public
