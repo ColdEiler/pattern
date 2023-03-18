@@ -13,8 +13,9 @@ abstract class Student_basis{
      +validate?(): Boolean
      +get_contacts(): String
      .. getters..
-     git(): String
-     id():String
+     +git(): String
+     +id():String
+     +contact():String
      .. setters ..
      id=(Integer)
 }
@@ -36,7 +37,7 @@ class Student extends Student_basis{
      +to_s(): String
      +get_info(): String
      +to_json():String
-     +{static}read_from_txt(String)):Array
+     +{static}read_from_txt(String):Array
      +{static}write_to_txt(String,Array)
      .. getters ..
      +phone(): String
@@ -57,16 +58,13 @@ class Student extends Student_basis{
 }
 
 class Student_short extends Student_basis{
-     +lastname_and_initials: String
-     +contact:String
-     +id: Integer
-     +git: String
+     -lastname_and_initials: String
+     
      {static}from_student(Student): ShortStudent
      +initialize(Integer, String)
      +to_s(): String
      .. getters ..
      +lastname_and_initials():String
-     +contact():String
      .. setters ..
 
 }
@@ -74,7 +72,7 @@ class Student_short extends Student_basis{
 
 class DataTable{
     -table : Array
-    +rows_count: Integer
+    -rows_count: Integer
     -cols_count: Integer
     __
     +initialize(Array)
@@ -93,7 +91,7 @@ abstract class DataList{
     -selected_objects: Array
     __
     -initialize(Array)
-    +select(Integer)
+    +select(Integer):Array
     +get_selected(): Array<Integer>
     +get_data(): DataTable
     #get_names()
@@ -111,7 +109,7 @@ class DataListStudentShort extends DataList{
     --
     +initialize(Array)
     +get_names(): Array
-    #get_fields_datatable(): Array<String>
+    #get_fields_datatable(Student_short): Array<String>
 }
 
 DataList ..> DataTable
