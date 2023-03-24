@@ -115,11 +115,12 @@ class DataListStudentShort extends DataList{
 DataList ..> DataTable
 DataListStudentShort o-- Student_short
 
-abstract class Student_List_Base{
+class Student_List_Base{
     -students: Array
     -slb_id: Integer
+    -file_type:DataToFileStrategy
 --
-    initialize()
+    initialize(DataToFileStrategy)
     +read_from_file(String)
     +write_to_file(String)
     +get_k_n_student_short_list(Integer,Integer,
@@ -130,37 +131,44 @@ abstract class Student_List_Base{
     +remove_student(Integer): Array
     +get_student_short_count: Integer
     +update_id: Integer
-    #str_to_hash_list(String)
-    #hash_list_to_str(Array)
+
 --  getters --
     -students: Array
     -slb_id:Integer
+    -file_type: DataToFileStrategy
 --  setters --
     -students:Array
     -slb_id:Integer
+    -file_type:DataToFileStrategy
 }
 
-class Student_List_Json extends Student_List_Base{
+abstract class DataToFileStrategy{
+    initialize()
+    #str_to_hash_list(string):Array
+    #hash_list_to_str(Array)):String
+}
+
+class Student_List_Json extends DataToFileStrategy{
     --
     initialize()
-    #str_to_hash_list(String):Array
-    #hash_list_to_str(Array):String
+    +str_to_hash_list(String):Array
+    +hash_list_to_str(Array):String
 
 }
 
-class Student_List_YAML extends Student_List_Base{
+class Student_List_YAML extends DataToFileStrategy{
     --
     initialize()
-    #str_to_hash_list(String):Array
-    #hash_list_to_str(Array):String
+    +str_to_hash_list(String):Array
+    +hash_list_to_str(Array):String
 
 }
 
-class Student_List_TXT extends Student_List_Base{
+class Student_List_TXT extends DataToFileStrategy{
     --
     initialize()
-    #str_to_hash_list(String):Array
-    #hash_list_to_str(Array):String
+    +str_to_hash_list(String):Array
+    +hash_list_to_str(Array):String
 }
-
+Student_List_Base *-- DataToFileStrategy
 @enduml
