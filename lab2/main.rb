@@ -4,6 +4,7 @@ require_relative 'data_table'
 require_relative 'data_list_student_short'
 require_relative 'data_list'
 require_relative 'student_list_json'
+require_relative 'students_list_YAML'
 require 'json'
 
 student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владислав',father_name: 'Андреевич', id: 1,git:"ColdEiler", phone:'79667665060')
@@ -57,3 +58,13 @@ st_list_json.write_to_file('./lab2/students.json')
 st_list_json.read_from_file('./lab2/students.json')
 
 puts "Read and write #{st_list_json.get_student_short_count} students!!!"
+
+st_list_yaml = Student_List_YAML.new
+st_list_yaml.add_student(student_1)
+st_list_yaml.add_student(student_2)
+st_list_yaml.add_student(student_3)
+
+st_list_yaml.write_to_file('./lab2/students.yaml')
+st_list_yaml.read_from_file('./lab2/students.yaml')
+
+puts "Read and write #{st_list_yaml.get_student_short_count} students"
