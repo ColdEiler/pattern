@@ -1,0 +1,3 @@
+lastname:Минаков ,firstname:Владислав,father_name:Андреевич,id:1,phone:79667665060,git:ColdEiler
+lastname:Титов,firstname:Кирилл,father_name:Вадимович,id:2,phone:79667665060,git:waasabi13
+lastname:Головий,firstname:Виталий,father_name:Александрович,id:3,phone:79002623817,git:vitaliG

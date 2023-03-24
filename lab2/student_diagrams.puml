@@ -156,4 +156,11 @@ class Student_List_YAML extends Student_List_Base{
 
 }
 
+class Student_List_TXT extends Student_List_Base{
+    --
+    initialize()
+    #str_to_hash_list(String):Array
+    #hash_list_to_str(Array):String
+}
+
 @enduml
