@@ -114,4 +114,46 @@ class DataListStudentShort extends DataList{
 
 DataList ..> DataTable
 DataListStudentShort o-- Student_short
+
+abstract class Student_List_Base{
+    -students: Array
+    -slb_id: Integer
+--
+    initialize()
+    +read_from_file(String)
+    +write_to_file(String)
+    +get_k_n_student_short_list(Integer,Integer,
+    data_list:nil): DataListStudentShort
+    +student_by_id(Integer):Student
+    +sort_students: Array
+    +add_student(Student): Array
+    +remove_student(Integer): Array
+    +get_student_short_count: Integer
+    +update_id: Integer
+    #str_to_hash_list(String)
+    #hash_list_to_str(Array)
+--  getters --
+    -students: Array
+    -slb_id:Integer
+--  setters --
+    -students:Array
+    -slb_id:Integer
+}
+
+class Student_List_Json extends Student_List_Base{
+    --
+    initialize()
+    #str_to_hash_list(String):Array
+    #hash_list_to_str(Array):String
+
+}
+
+class Student_List_YAML extends Student_List_Base{
+    --
+    initialize()
+    #str_to_hash_list(String):Array
+    #hash_list_to_str(Array):String
+
+}
+
 @enduml
