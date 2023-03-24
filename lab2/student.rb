@@ -88,21 +88,15 @@ class Student < Student_basis
     res
   end
 
+  def self.from_hash(hash)
+    raise ArgumentError, '"У вас проблема с обязательными полями !!!"' unless hash.key?(:firstname) && hash.key?(:lastname) && hash.key?(:father_name)
+    Student.new( **hash)
+  end
+
   #метод создающий объект из строки
   def self.from_json(str)
     options = JSON.parse(str)
-    firstname = options["firstname"]
-    lastname = options["lastname"]
-    father_name = options["father_name"]
-    raise ArgumentError, "У вас проблема с обязательными полями !!!" if firstname.nil? || lastname.nil? || father_name.nil?
-
-    phone = options["phone"]
-    git = options["git"]
-    email = options["email"]
-    telegram = options["telegram"]
-    id = options["id"]
-
-    Student.new(lastname:lastname,firstname:firstname,father_name:father_name,id:id,git:git,email:email,telegram:telegram,phone:phone)
+    from_hash(options)
   end
 
   def self.read_from_txt(filepath)
@@ -124,15 +118,17 @@ class Student < Student_basis
   end
   # метод представляющий объект в виде строки
   def to_json
-    options={}
-    [:lastname,:firstname,:father_name,:id,:phone, :telegram,
-     :email,:git].each do |attr|
-      attr_val = send(attr)
-      options[attr] = attr_val unless attr_val.nil?
-    end
-    JSON.generate(options)
+    JSON.generate(to_hash)
   end
 
+  def to_hash
+    attrs = {}
+    %i[lastname firstname father_name id phone telegram email git].each do |attr|
+      attr_val = send(attr)
+      attrs[attr] = attr_val unless attr_val.nil?
+    end
+    attrs
+  end
 
   # Метод возвращающий краткую инфу об объекте
   def get_info
