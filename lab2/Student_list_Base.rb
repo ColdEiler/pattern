@@ -55,7 +55,7 @@ class Student_List_Base
   end
 
   def update_id
-    self.slb_id = students.max_by(&:id).id+1
+    self.slb_id = students.max_by(&:id).id.to_i + 1
   end
 
   protected
