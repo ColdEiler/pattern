@@ -1,16 +1,18 @@
 require_relative 'student'
 class Student_List_Base
-  private_class_method :new
 
   attr_accessor :students, :slb_id
-  def initialize
+
+  attr_accessor :file_type
+  def initialize(file_type)
     self.students = []
     self.slb_id = 1
+    self.file_type = file_type
   end
 
   def read_from_file(filepath)
     raise ArgumentError,"Файла не существует!!!" unless File.exist?(filepath)
-    objects_list = str_to_hash_list(File.read(filepath))
+    objects_list = file_type.str_to_hash_list(File.read(filepath))
     self.students = objects_list.map{|h| Student.from_hash(h)}
     update_id
   end
@@ -18,7 +20,7 @@ class Student_List_Base
   def write_to_file(filepath)
     raise ArgumentError,"Файла не существует!!!" unless File.exist?(filepath)
     objects_list = students.map(&:to_hash)
-    File.write(filepath,hash_list_to_str(objects_list))
+    File.write(filepath,file_type.hash_list_to_str(objects_list))
   end
 
   def get_k_n_student_short_list(k,n,data_list:nil)
@@ -57,13 +59,5 @@ class Student_List_Base
   def update_id
     self.slb_id = students.max_by(&:id).id.to_i + 1
   end
-
-  protected
-  def str_to_hash_list(str)
-  end
-
-  def hash_list_to_str(hash_list)
-  end
-
 
 end

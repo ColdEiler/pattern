@@ -1,9 +1,9 @@
 require_relative 'Student_list_Base.rb'
+require_relative 'DataToFileStrategy'
 require 'json'
-class Student_List_JSON<Student_List_Base
+class Student_List_JSON<DataToFileStrategy
   public_class_method :new
 
-  protected
   def str_to_hash_list(str)
     JSON.parse(str,{symbolize_names: true})
   end

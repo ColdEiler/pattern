@@ -6,6 +6,7 @@ require_relative 'data_list'
 require_relative 'student_list_json'
 require_relative 'students_list_YAML'
 require_relative 'student_list_txt'
+require_relative 'Student_list_Base'
 require 'json'
 
 student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владислав',father_name: 'Андреевич', id: 1,git:"ColdEiler", phone:'79667665060')
@@ -50,7 +51,7 @@ student_3 = Student.new(lastname: 'Головий',firstname: 'Виталий',f
 #   end
 #
 
-st_list_json = Student_List_JSON.new
+st_list_json = Student_List_Base.new(Student_List_JSON.new)
 st_list_json.add_student(student_1)
 st_list_json.add_student(student_2)
 st_list_json.add_student(student_3)
@@ -60,7 +61,7 @@ st_list_json.read_from_file('./lab2/students.json')
 
 puts "Read and write #{st_list_json.get_student_short_count} students json!!!"
 
-st_list_yaml = Student_List_YAML.new
+st_list_yaml = Student_List_Base.new(Student_List_YAML.new)
 st_list_yaml.add_student(student_1)
 st_list_yaml.add_student(student_2)
 st_list_yaml.add_student(student_3)
@@ -70,7 +71,7 @@ st_list_yaml.read_from_file('./lab2/students.yaml')
 
 puts "Read and write #{st_list_yaml.get_student_short_count} students yaml"
 
-st_list_txt = Student_List_TXT.new
+st_list_txt = Student_List_Base.new(Student_List_TXT.new)
 st_list_txt.add_student(student_1)
 st_list_txt.add_student(student_2)
 st_list_txt.add_student(student_3)

@@ -1,10 +1,10 @@
 require_relative 'Student_list_Base'
+require_relative 'DataToFileStrategy'
 require 'yaml'
 
-class Student_List_YAML<Student_List_Base
+class Student_List_YAML<DataToFileStrategy
   public_class_method :new
 
-  protected
   def str_to_hash_list(str)
     YAML.safe_load(str).map{|hash| hash.transform_keys(&:to_sym) }
   end
