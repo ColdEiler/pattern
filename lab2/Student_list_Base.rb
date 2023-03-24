@@ -11,13 +11,13 @@ class Student_List_Base
   def read_from_file(filepath)
     raise ArgumentError,"Файла не существует!!!" unless File.exist?(filepath)
     objects_list = str_to_hash_list(File.read(filepath))
-    self.students = objects_list.map{|h| Student.from_json(h)}
+    self.students = objects_list.map{|h| Student.from_hash(h)}
     update_id
   end
 
   def write_to_file(filepath)
     raise ArgumentError,"Файла не существует!!!" unless File.exist?(filepath)
-    objects_list = students.map(& to_hash)
+    objects_list = students.map(&:to_hash)
     File.write(filepath,hash_list_to_str(objects_list))
   end
 
