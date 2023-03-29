@@ -1,5 +1,5 @@
 require 'json'
-require_relative 'student_abstract'
+require_relative '../student_model/student_abstract'
 class Student < Student_basis
   # Делаем Student_basis публичным
   public_class_method :new

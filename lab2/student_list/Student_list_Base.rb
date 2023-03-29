@@ -1,4 +1,4 @@
-require_relative 'student'
+require_relative '../student_model/student'
 class Student_List_Base
 
   attr_accessor :students, :slb_id

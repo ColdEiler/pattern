@@ -1,4 +1,4 @@
-require_relative 'Student_list_Base.rb'
+require_relative '../student_list/student_list_Base'
 require_relative 'DataToFileStrategy'
 require 'json'
 class Student_List_JSON<DataToFileStrategy

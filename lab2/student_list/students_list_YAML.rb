@@ -1,4 +1,4 @@
-require_relative 'Student_list_Base'
+require_relative '../student_list/Student_list_Base'
 require_relative 'DataToFileStrategy'
 require 'yaml'
 

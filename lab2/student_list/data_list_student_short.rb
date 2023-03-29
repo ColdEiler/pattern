@@ -1,4 +1,4 @@
-require_relative 'data_list'
+require_relative '../student_list/data_list'
 
 class Data_list_Student_Short < DataList
   public_class_method :new
