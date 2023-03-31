@@ -145,7 +145,7 @@ class Student_List_Base{
 abstract class DataToFileStrategy{
     initialize()
     #str_to_hash_list(string):Array
-    #hash_list_to_str(Array)):String
+    #hash_list_to_str(Array):String
 }
 
 class Student_List_Json extends DataToFileStrategy{
@@ -171,4 +171,33 @@ class Student_List_TXT extends DataToFileStrategy{
     +hash_list_to_str(Array):String
 }
 Student_List_Base *-- DataToFileStrategy
+
+abstract class Singleton {
+    -instance_mutex: Mutex
+    --
+    initialize()
+    {static}initialize():Singleton
+}
+
+class Student_list_db{
+    -client: SQLite3::Database
+    -singleton: Singleton
+    --
+    +initialize(String)
+    +from_array_to_hash(Array):Hash
+    +student_fields(Student): Array
+    +student_by_id(Integer):Student
+    +add_student(Student)
+    +delete_student_by_id(Integer)
+    +replace_student_by_id(Integer,Student)
+    +count():Integer
+    +get_k_n_student_shorts(Integer,Integer,DataList:nil)
+    --getters--
+    -client():SQLite3::Database
+    --setters--
+    -client=(SQLite3::Database)    
+
+}
+Student_list_db o-- Singleton
+
 @enduml
