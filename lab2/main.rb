@@ -26,10 +26,12 @@ student_3 = Student.new(lastname: 'Головий',firstname: 'Виталий',f
 puts 'Тест работы класса db'
 
 client = Student_list_db.new("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
-st = client.student_by_id(1)
-puts st
+client2 = Student_list_db.new("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
+#st = client.student_by_id(1)
+#puts st
 
 #client.add_student(student_3)
 #client.delete_student_by_id(6)
 #client.delete_student_by_id(7)
 #puts client.count
+

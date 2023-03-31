@@ -1,8 +1,8 @@
 require 'sqlite3'
-
+require_relative 'singleton_db.rb'
 
 class Student_list_db
-
+    public_class_method :new
     def from_array_to_hash(arr)
         attrs = {}
         i=0
@@ -17,9 +17,9 @@ class Student_list_db
          [student.lastname, student.firstname, student.father_name, student.phone,student.telegram, student.email, student.git]
     end
 
-    
     def initialize(filepath)
         self.client = SQLite3::Database.open filepath
+        self.singleton = Singleton.instance
     end
 
     def student_by_id(id)
@@ -59,5 +59,5 @@ class Student_list_db
     
     private
 
-    attr_accessor :client
+    attr_accessor :client,:singleton
 end
