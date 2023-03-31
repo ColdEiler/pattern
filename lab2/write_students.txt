@@ -1,0 +1,3 @@
+{"lastname":"Минаков ","firstname":"Владислав","father_name":"Андреевич","id":1,"phone":"79667665060"}
+{"lastname":"Головий ","firstname":"Виталий","father_name":"Александрович","id":2,"git":"vitaliyG"}
+{"lastname":"Манукьян ","firstname":"Артур","father_name":"Вагинакович","id":3,"phone":"79183667060"}
