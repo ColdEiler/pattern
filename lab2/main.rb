@@ -25,8 +25,13 @@ student_3 = Student.new(lastname: 'Головий',firstname: 'Виталий',f
 
 puts 'Тест работы класса db'
 
-client = Student_list_db.new("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
-client2 = Student_list_db.new("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
+#client = Student_list_db.new("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
+#client2 = Student_list_db.new("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
+
+client = Student_list_db.instance("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
+client2 = Student_list_db.instance("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")
+
+puts client, client2
 #st = client.student_by_id(1)
 #puts st
 

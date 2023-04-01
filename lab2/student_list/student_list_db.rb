@@ -1,8 +1,10 @@
 require 'sqlite3'
-require_relative 'singleton_db.rb'
+#require_relative 'singleton_db.rb'
 
 class Student_list_db
-    public_class_method :new
+    #public_class_method :new
+    @@instance=nil
+    
     def from_array_to_hash(arr)
         attrs = {}
         i=0
@@ -17,9 +19,23 @@ class Student_list_db
          [student.lastname, student.firstname, student.father_name, student.phone,student.telegram, student.email, student.git]
     end
 
-    def initialize(filepath)
+    def self.instance(filepath)
+		if @@instance then
+            @@instance.set_parameter(filepath)
+		else 
+            @@instance = Student_list_db.new(filepath)
+		end
+		return @@instance
+	end
+
+    def set_parameter(filepath)
         self.client = SQLite3::Database.open filepath
-        self.singleton = Singleton.instance
+    end
+    
+    def initialize(filepath)
+        self.set_parameter(filepath)
+        #self.client = SQLite3::Database.open filepath
+        #self.singleton = Singleton.instance
     end
 
     def student_by_id(id)
@@ -56,8 +72,10 @@ class Student_list_db
         ex_data_list
     end
     
+
+    
     
     private
 
-    attr_accessor :client,:singleton
+    attr_accessor :client #,:singleton
 end
