@@ -172,17 +172,12 @@ class Student_List_TXT extends DataToFileStrategy{
 }
 Student_List_Base *-- DataToFileStrategy
 
-abstract class Singleton {
-    -instance_mutex: Mutex
-    --
-    initialize()
-    {static}initialize():Singleton
-}
-
 class Student_list_db{
     -client: SQLite3::Database
-    -singleton: Singleton
+    -instance: Student_list_db
     --
+    {static}instance(String)
+    +set_parameter(String)
     +initialize(String)
     +from_array_to_hash(Array):Hash
     +student_fields(Student): Array
@@ -196,8 +191,6 @@ class Student_list_db{
     -client():SQLite3::Database
     --setters--
     -client=(SQLite3::Database)    
-
 }
-Student_list_db o-- Singleton
 
 @enduml
