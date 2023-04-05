@@ -178,19 +178,47 @@ class Student_list_db{
     --
     {static}instance(String)
     +set_parameter(String)
-    +initialize(String)
+    -initialize(String)
     +from_array_to_hash(Array):Hash
     +student_fields(Student): Array
     +student_by_id(Integer):Student
     +add_student(Student)
-    +delete_student_by_id(Integer)
-    +replace_student_by_id(Integer,Student)
-    +count():Integer
-    +get_k_n_student_shorts(Integer,Integer,DataList:nil)
+    +remove_student(Integer)
+    +replace_student(Integer,Student)
+    +student_count():Integer
+    +get_k_n_student_short(Integer,Integer,DataList:nil)
     --getters--
     -client():SQLite3::Database
     --setters--
     -client=(SQLite3::Database)    
 }
+
+class FileAdapter{
+    -filepath: String
+    -file: Student_list_Base
+    --
+    +initialize(DataToFileStrategy,String)
+    +student_by_id(Integer):Student
+    +get_k_n_student_short(Integer,Integer,DataList=nil):DataList
+    +add_student(Student)
+    +replace_student(Integer,Student)
+    +remove_student(Integer)
+    +student_count():Integer
+}
+FileAdapter o-- Student_list_Base
+
+class StudentClient{
+    -adapter
+    --
+    +initialize(adapter)
+    +student_by_id(Student):Integer
+    get_k_n_student_short(Integer,Integer,DataList=nil):DataList
+    +add_student(Student)
+    +replace_student(Integer,Student)
+    +remove_student(Integer)
+    +student_count():Integer
+}
+StudentClient o-- FileAdapter
+StudentClient o-- Student_list_db
 
 @enduml
