@@ -23,7 +23,7 @@ class Student_List_Base
     File.write(filepath,file_type.hash_list_to_str(objects_list))
   end
 
-  def get_k_n_student_short_list(k,n,data_list=nil)
+  def get_k_n_student_short(k,n,data_list=nil)
     page = (k-1)*n
     students_page_list = students[page,n].map{|st| Student_short.new(st.id,st.get_info)}
     return  Data_list_Student_Short.new(students_page_list) if data_list.nil?

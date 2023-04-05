@@ -48,12 +48,12 @@ class Student_list_db
         command.execute(*student_fields(student))
     end
 
-    def replace_student_by_id(id,student)
+    def replace_student(id,student)
         command = client.prepare('UPDATE student SET lastname=?, firstname=?, father_name=?, phone=?, telegram=?, email=?, git=? WHERE id=?')
         command.execute(*student_fields(student),id)
     end 
 
-    def delete_student_by_id(id)
+    def remove_student(id)
         command = client.prepare('DELETE FROM student WHERE id = ?')
         command.execute(id)
     end
@@ -62,7 +62,7 @@ class Student_list_db
         command = client.execute('select count(id) from student')
     end
 
-    def get_k_n_student_shorts(k,n, ex_data_list = nil)
+    def get_k_n_student_short(k,n, ex_data_list = nil)
         offset = (k - 1) * n
         students = client.prepare('SELECT * FROM student LIMIT ?, ?').execute(offset, n)
         slice = students.map { |h| Student_short.from_student(Student.new(**from_array_to_hash(h))) }

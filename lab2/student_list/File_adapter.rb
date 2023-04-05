@@ -9,8 +9,8 @@ class FileAdapter
         @file.student_by_id(student_id)
     end
 
-    def get_k_n_student_short_list(k,n,data_list=nil)
-        @file.get_k_n_student_short_list(k,n,data_list)
+    def get_k_n_student_short(k,n,data_list=nil)
+        @file.get_k_n_student_short(k,n,data_list)
     end
 
     def add_student(student)
