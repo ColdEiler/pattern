@@ -32,7 +32,7 @@ class Student_list_db
         self.client = SQLite3::Database.open filepath
     end
     
-    def initialize(filepath)
+    private def initialize(filepath)
         self.set_parameter(filepath)
         #self.client = SQLite3::Database.open filepath
         #self.singleton = Singleton.instance
@@ -62,14 +62,11 @@ class Student_list_db
         command = client.execute('select count(id) from student')
     end
 
-    def get_k_n_student_shorts(k,n, ex_data_list:nil)
+    def get_k_n_student_shorts(k,n, ex_data_list = nil)
         offset = (k - 1) * n
         students = client.prepare('SELECT * FROM student LIMIT ?, ?').execute(offset, n)
         slice = students.map { |h| Student_short.from_student(Student.new(**from_array_to_hash(h))) }
         return Data_list_Student_Short.new(slice) if ex_data_list.nil?
-
-        ex_data_list.append(*slice)
-        ex_data_list
     end
     
 
