@@ -58,7 +58,7 @@ class Student_list_db
         command.execute(id)
     end
 
-    def count
+    def student_count
         command = client.execute('select count(id) from student')
     end
 
