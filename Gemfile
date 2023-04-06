@@ -3,5 +3,6 @@
 source "https://rubygems.org"
 
 #gem "rails"
-#gem "sqlite3"
-gem "mysql2"
+gem "sqlite3"
+gem "fxruby"
+gem "glimmer-dsl-libui"
