@@ -172,13 +172,10 @@ class Student_List_TXT extends DataToFileStrategy{
 }
 Student_List_Base *-- DataToFileStrategy
 
-class Student_list_db{
-    -client: SQLite3::Database
-    -instance: Student_list_db
+class DB_Adapter{
+    -db: DB_Source
     --
-    {static}instance(String)
-    +set_parameter(String)
-    -initialize(String)
+    initialize()
     +from_array_to_hash(Array):Hash
     +student_fields(Student): Array
     +student_by_id(Integer):Student
@@ -187,10 +184,17 @@ class Student_list_db{
     +replace_student(Integer,Student)
     +student_count():Integer
     +get_k_n_student_short(Integer,Integer,DataList:nil)
-    --getters--
-    -client():SQLite3::Database
-    --setters--
-    -client=(SQLite3::Database)    
+        
+}
+
+class DB_Source{
+    -instance_mutex:Mutex
+    -instance: DB_Source
+    -db:SQLite3::Database
+    --
+    +instance():DB_Source 
+    -initialize()
+    exec(String,*Object):SQLite3::Result
 }
 
 class FileAdapter{
@@ -205,7 +209,7 @@ class FileAdapter{
     +remove_student(Integer)
     +student_count():Integer
 }
-FileAdapter o-- Student_list_Base
+FileAdapter o-- Student_List_Base
 
 class StudentClient{
     -adapter
@@ -219,6 +223,10 @@ class StudentClient{
     +student_count():Integer
 }
 StudentClient o-- FileAdapter
-StudentClient o-- Student_list_db
+StudentClient o-- DB_Adapter
+DB_Adapter o-- DB_Source
+StudentClient ..> DataListStudentShort
+
+
 
 @enduml
