@@ -203,7 +203,7 @@ class FileAdapter{
     --
     +initialize(DataToFileStrategy,String)
     +student_by_id(Integer):Student
-    +get_k_n_student_short(Integer,Integer,DataList=nil):DataList
+    +get_k_n_student_short(Integer,Integer,DataList=nil):DataListStudentShort
     +add_student(Student)
     +replace_student(Integer,Student)
     +remove_student(Integer)
@@ -216,7 +216,7 @@ class StudentClient{
     --
     +initialize(adapter)
     +student_by_id(Student):Integer
-    get_k_n_student_short(Integer,Integer,DataList=nil):DataList
+    +get_k_n_student_short(Integer,Integer,DataList=nil):DataListStudentShort
     +add_student(Student)
     +replace_student(Integer,Student)
     +remove_student(Integer)
