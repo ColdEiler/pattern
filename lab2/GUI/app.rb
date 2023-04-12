@@ -85,14 +85,23 @@ class HelloWindow < FXMainWindow
         end  
       end
       
+      buttons_table = []
       x = 300
       y = 420
       (0..19).each do |i|
         new_x = x+30*i 
-        create_button(frame,"#{i+1}",new_x,y)
+        buttons_table<<create_button(frame,"#{i+1}",new_x,y)
       end
 
-      
+      create_buttons = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
+        :width=>80,:height=>25)
+      update_buttons = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
+        :width=>80,:height=>25)
+      delete_buttons = FXButton.new(frame,"Удалить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>150,
+        :width=>80,:height=>25)
+      change_buttons = FXButton.new(frame,"Изменить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>200,
+        :width=>80,:height=>25)
+            
 
       contact_tab = FXTabItem.new(tabbook, " Tab1 ")
       contact_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
