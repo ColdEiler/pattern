@@ -20,6 +20,11 @@ class HelloWindow < FXMainWindow
         :width => 200, :height => 20)
     end
 
+    def create_button(parent,text,x,y)
+      FXButton.new(parent,text,:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>x,:y=>y,
+        :width=>20,:height=>15)
+    end
+
     def initialize(app)
       super(app, "Hello, World!", :width => 1200, :height => 600)
       tabbook = FXTabBook.new(self, :opts => LAYOUT_FILL) 
@@ -58,8 +63,37 @@ class HelloWindow < FXMainWindow
       teleg_text = create_text(frame,0,310)
       check_combobox(teleg_combobox,teleg_text)
       
+      table = FXTable.new(frame,:opts =>LAYOUT_EXPLICIT,:x=>250,:y=>0,:height=>400,:width=>650)
+      table.setTableSize(20,5)
+      table.tableStyle |=TABLE_ROW_SIZABLE|TABLE_COL_SIZABLE 
+      table.setColumnText(0, "ФИО")
+      table.setColumnText(1, "Email")
+      table.setColumnText(2, "Git")
+      table.setColumnText(3, "Phone")
+      table.setColumnText(4, "Telegram")
+      table.editable = false
       
+      ex = [
+        ["Минаков В.А","valdos777m@gmail.com","ColdEiler",nil,nil],
+        ["Иванов В.А",nil,"Coler","79667665060",nil],
+        ["Власов О.А","vlasovOleg@gmail.com","Vlasik","79667665060","@midle"]
+      ]
+
+      (0..2).each do |i|
+        (0..4).each do |j|
+          table.setItemText(i,j,ex[i][j])
+        end  
+      end
       
+      x = 300
+      y = 420
+      (0..19).each do |i|
+        new_x = x+30*i 
+        create_button(frame,"#{i+1}",new_x,y)
+      end
+
+      
+
       contact_tab = FXTabItem.new(tabbook, " Tab1 ")
       contact_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
       extras_tab = FXTabItem.new(tabbook, " Tab2 ")
