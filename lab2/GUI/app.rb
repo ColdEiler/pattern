@@ -97,12 +97,11 @@ class HelloWindow < FXMainWindow
           table.setItemText(i,j,ex[i][j])
         end
       end
-      
-      table.connect(SEL_COMMAND) do |sender, sel, pos|
-          if (table.currentColumn == 0) then sort_columns(table) end
-      end
 
       
+       table.connect(SEL_COMMAND) do |sender, sel, pos|
+          if (sender.currentColumn == 0) then sort_columns(table) end
+       end
       
 
 
@@ -115,20 +114,42 @@ class HelloWindow < FXMainWindow
         buttons_table<<create_button(frame,"#{i+1}",new_x,y)
       end
 
-      create_buttons = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
+      create_button = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
         :width=>80,:height=>25)
-      update_buttons = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
+      update_button = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
         :width=>80,:height=>25)
-      delete_buttons = FXButton.new(frame,"Удалить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>150,
+      delete_button = FXButton.new(frame,"Удалить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>150,
         :width=>80,:height=>25)
-      change_buttons = FXButton.new(frame,"Изменить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>200,
+      delete_button.enabled = false
+      change_button = FXButton.new(frame,"Изменить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>200,
         :width=>80,:height=>25)
-            
+      change_button.enabled = false      
 
+      table.connect(SEL_COMMAND) do 
+          if get_select_rows(table) == 0 then 
+            change_button.enabled = true
+            delete_button.enabled = true
+          end
+
+          if get_select_rows(table) > 0 then
+            delete_button.enabled = true
+            change_button.enabled = false
+          end
+
+          if get_select_rows(table) < 0 then 
+            delete_button.enabled = false
+            change_button.enabled = false
+          end 
+           
+      end  
       contact_tab = FXTabItem.new(tabbook, " Tab1 ")
       contact_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
       extras_tab = FXTabItem.new(tabbook, " Tab2 ")
       extras_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
+    end
+    
+    def get_select_rows(table)
+      table.selEndRow - table.selStartRow
     end
     
     def check_combobox(combobox,text)
