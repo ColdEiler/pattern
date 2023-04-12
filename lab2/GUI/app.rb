@@ -25,6 +25,18 @@ class HelloWindow < FXMainWindow
         :width=>20,:height=>15)
     end
 
+    def sort_columns(table)
+      initials =[]
+      (0..2).each do |row|
+        initials << table.getItemText(row,0)
+      end
+      initials.to_a
+      initials = initials.sort_by{|a| a.size}
+      (0..initials.size-1).each do |i|
+        table.setItemText(i,0,initials[i]) 
+      end
+    end
+
     def initialize(app)
       super(app, "Hello, World!", :width => 1200, :height => 600)
       tabbook = FXTabBook.new(self, :opts => LAYOUT_FILL) 
@@ -72,19 +84,29 @@ class HelloWindow < FXMainWindow
       table.setColumnText(3, "Phone")
       table.setColumnText(4, "Telegram")
       table.editable = false
-      
+
+
       ex = [
         ["Минаков В.А","valdos777m@gmail.com","ColdEiler",nil,nil],
         ["Иванов В.А",nil,"Coler","79667665060",nil],
-        ["Власов О.А","vlasovOleg@gmail.com","Vlasik","79667665060","@midle"]
+        ["Власовенко О.А","vlasovOleg@gmail.com","Vlasik","79667665060","@midle"]
       ]
 
       (0..2).each do |i|
         (0..4).each do |j|
           table.setItemText(i,j,ex[i][j])
-        end  
+        end
       end
       
+      table.connect(SEL_COMMAND) do |sender, sel, pos|
+          if (table.currentColumn == 0) then sort_columns(table) end
+      end
+
+      
+      
+
+
+
       buttons_table = []
       x = 300
       y = 420
