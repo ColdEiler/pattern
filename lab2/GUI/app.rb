@@ -25,9 +25,9 @@ class HelloWindow < FXMainWindow
         :width=>20,:height=>15)
     end
 
-    def sort_columns(table)
+    def sort_columns(table,row_num)
       initials =[]
-      (0..2).each do |row|
+      (0..(row_num-1)).each do |row|
         initials << table.getItemText(row,0)
       end
       initials.to_a
@@ -75,7 +75,7 @@ class HelloWindow < FXMainWindow
       teleg_text = create_text(frame,0,310)
       check_combobox(teleg_combobox,teleg_text)
       
-      table = FXTable.new(frame,:opts =>LAYOUT_EXPLICIT,:x=>250,:y=>0,:height=>400,:width=>650)
+      table = FXTable.new(frame,:opts =>LAYOUT_EXPLICIT|TABLE_NO_ROWSELECT|TABLE_NO_COLSELECT,:x=>250,:y=>0,:height=>400,:width=>650)
       table.setTableSize(20,5)
       table.tableStyle |=TABLE_ROW_SIZABLE|TABLE_COL_SIZABLE 
       table.setColumnText(0, "ФИО")
@@ -91,20 +91,13 @@ class HelloWindow < FXMainWindow
         ["Иванов В.А",nil,"Coler","79667665060",nil],
         ["Власовенко О.А","vlasovOleg@gmail.com","Vlasik","79667665060","@midle"]
       ]
+      row_num = ex.length
 
-      (0..2).each do |i|
-        (0..4).each do |j|
+      (0..ex.length-1).each do |i|
+        (0..ex[i].length-1).each do |j|
           table.setItemText(i,j,ex[i][j])
         end
       end
-
-      
-       table.connect(SEL_COMMAND) do |sender, sel, pos|
-          if (sender.currentColumn == 0) then sort_columns(table) end
-       end
-      
-
-
 
       buttons_table = []
       x = 300
@@ -124,6 +117,14 @@ class HelloWindow < FXMainWindow
       change_button = FXButton.new(frame,"Изменить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>200,
         :width=>80,:height=>25)
       change_button.enabled = false      
+
+      
+      button_sort = FXButton.new(frame,"Сортировка ФИО ",:opts =>LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>250,:height=>20,:width=>130)
+
+      
+      button_sort.connect(SEL_COMMAND) do |sender, sel, pos|
+         sort_columns(table,ex.length) 
+      end
 
       table.connect(SEL_COMMAND) do 
           if get_select_rows(table) == 0 then 
