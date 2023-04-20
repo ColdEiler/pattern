@@ -39,6 +39,7 @@ class HelloWindow < FXMainWindow
 
     def initialize(app)
       super(app, "Hello, World!", :width => 1200, :height => 600)
+      @count_page = 3
       tabbook = FXTabBook.new(self, :opts => LAYOUT_FILL) 
       student_tab = FXTabItem.new(tabbook, " Students ")
       student_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
@@ -78,21 +79,28 @@ class HelloWindow < FXMainWindow
       teleg_text.editable = false
       check_combobox(teleg_combobox,teleg_text)
       
-      table = FXTable.new(frame,:opts =>LAYOUT_EXPLICIT|TABLE_NO_ROWSELECT|TABLE_NO_COLSELECT,:x=>250,:y=>0,:height=>400,:width=>650)
-      table.setTableSize(20,5)
+      table = FXTable.new(frame,:opts =>LAYOUT_EXPLICIT|TABLE_NO_ROWSELECT|TABLE_NO_COLSELECT|TABLE_ROW_RENUMBER,:x=>250,:y=>0,:height=>400,:width=>470)
+      table.setTableSize(20,3)
       table.tableStyle |=TABLE_ROW_SIZABLE|TABLE_COL_SIZABLE 
       table.setColumnText(0, "ФИО")
-      table.setColumnText(1, "Email")
+      table.setColumnText(1, "Contact")
       table.setColumnText(2, "Git")
-      table.setColumnText(3, "Phone")
-      table.setColumnText(4, "Telegram")
       table.editable = false
 
 
+      btn_back=FXButton.new(frame, "Назад", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>250,:y=>420,:height=>30,:width=>40)
+      btn_back.textColor = Fox.FXRGB(0,23,175)
+      #добавить отображение со страницы, на которой мы сейчас
+      res=Array(1..@count_page).join(' ')
+      page_label = FXLabel.new(frame, res,:opts=> LAYOUT_EXPLICIT, :x=>280,:y=>420,:height=>30,:width=>50)
+      btn_next=FXButton.new(frame, "Далее", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>350,:y=>420,:height=>30,:width=>40)
+      btn_next.textColor = Fox.FXRGB(0,23,175)
+
+
       ex = [
-        ["Минаков В.А","valdos777m@gmail.com","ColdEiler",nil,nil],
-        ["Иванов В.А",nil,"Coler","79667665060",nil],
-        ["Власовенко О.А","vlasovOleg@gmail.com","Vlasik","79667665060","@midle"]
+        ["Минаков В.А","valdos777m@gmail.com","ColdEiler"],
+        ["Иванов В.А","79667665060","Coler"],
+        ["Власовенко О.А","vlasovOleg@gmail.com","Vlasik"]
       ]
       row_num = ex.length
 
@@ -101,6 +109,15 @@ class HelloWindow < FXMainWindow
           table.setItemText(i,j,ex[i][j])
           table.setItemJustify(i,j, FXTableItem::CENTER_X)
         end
+      end
+
+      btn_next.connect(SEL_COMMAND) do
+        table.killSelection
+      end
+
+      
+      btn_back.connect(SEL_COMMAND) do
+        table.killSelection
       end
 
       # buttons_table = []
@@ -114,13 +131,13 @@ class HelloWindow < FXMainWindow
       #button_left = create_button(frame,"<-",450,420)
       #button_right = create_button(frame,"->",600,420)
       
-      spinner = FXSpinner.new(frame,4,
-        :opts => SPIN_NORMAL|LAYOUT_EXPLICIT,
-        :x => 450,
-        :y => 420,
-        :width => 30,
-        :height => 30,
-      )
+      # spinner = FXSpinner.new(frame,4,
+      #   :opts => SPIN_NORMAL|LAYOUT_EXPLICIT,
+      #   :x => 450,
+      #   :y => 420,
+      #   :width => 30,
+      #   :height => 30,
+      # )
       create_button = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
         :width=>80,:height=>25)
       update_button = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
