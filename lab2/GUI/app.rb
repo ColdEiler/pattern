@@ -22,7 +22,7 @@ class HelloWindow < FXMainWindow
 
     def create_button(parent,text,x,y)
       FXButton.new(parent,text,:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>x,:y=>y,
-        :width=>20,:height=>15)
+        :width=>40,:height=>25)
     end
 
     def sort_columns(table,row_num)
@@ -61,18 +61,21 @@ class HelloWindow < FXMainWindow
       git_combobox = create_combobox(frame,0,140)
       state_names.each { |name| git_combobox.appendItem(name)}
       git_text = create_text(frame,0,170)
+      git_text.editable = false
       check_combobox(git_combobox,git_text)
 
       create_label(frame,"Телефон",0,190)
       phone_combobox = create_combobox(frame,0,210)
       state_names.each { |name| phone_combobox.appendItem(name)}
       phone_text = create_text(frame,0,240)
+      phone_text.editable = false
       check_combobox(phone_combobox,phone_text)
 
       create_label(frame,"Телеграм",0,260)
       teleg_combobox = create_combobox(frame,0,280)
       state_names.each { |name| teleg_combobox.appendItem(name)}
       teleg_text = create_text(frame,0,310)
+      teleg_text.editable = false
       check_combobox(teleg_combobox,teleg_text)
       
       table = FXTable.new(frame,:opts =>LAYOUT_EXPLICIT|TABLE_NO_ROWSELECT|TABLE_NO_COLSELECT,:x=>250,:y=>0,:height=>400,:width=>650)
@@ -96,17 +99,28 @@ class HelloWindow < FXMainWindow
       (0..ex.length-1).each do |i|
         (0..ex[i].length-1).each do |j|
           table.setItemText(i,j,ex[i][j])
+          table.setItemJustify(i,j, FXTableItem::CENTER_X)
         end
       end
 
-      buttons_table = []
-      x = 300
-      y = 420
-      (0..19).each do |i|
-        new_x = x+30*i 
-        buttons_table<<create_button(frame,"#{i+1}",new_x,y)
-      end
+      # buttons_table = []
+      # x = 300
+      # y = 420
+      # (0..19).each do |i|
+      #   new_x = x+30*i 
+      #   buttons_table<<create_button(frame,"#{i+1}",new_x,y)
+      # end
 
+      #button_left = create_button(frame,"<-",450,420)
+      #button_right = create_button(frame,"->",600,420)
+      
+      spinner = FXSpinner.new(frame,4,
+        :opts => SPIN_NORMAL|LAYOUT_EXPLICIT,
+        :x => 450,
+        :y => 420,
+        :width => 30,
+        :height => 30,
+      )
       create_button = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
         :width=>80,:height=>25)
       update_button = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
@@ -114,9 +128,9 @@ class HelloWindow < FXMainWindow
       delete_button = FXButton.new(frame,"Удалить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>150,
         :width=>80,:height=>25)
       delete_button.enabled = false
-      change_button = FXButton.new(frame,"Изменить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>200,
+      edit_button = FXButton.new(frame,"Изменить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>200,
         :width=>80,:height=>25)
-      change_button.enabled = false      
+      edit_button.enabled = false      
 
       
       button_sort = FXButton.new(frame,"Сортировка ФИО ",:opts =>LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>250,:height=>20,:width=>130)
@@ -128,21 +142,27 @@ class HelloWindow < FXMainWindow
 
       table.connect(SEL_COMMAND) do 
           if get_select_rows(table) == 0 then 
-            change_button.enabled = true
+            edit_button.enabled = true
             delete_button.enabled = true
           end
 
           if get_select_rows(table) > 0 then
             delete_button.enabled = true
-            change_button.enabled = false
+            edit_button.enabled = false
           end
 
           if get_select_rows(table) < 0 then 
             delete_button.enabled = false
-            change_button.enabled = false
+            edit_button.enabled = false
           end 
            
       end  
+      exit_button = FXButton.new(frame,"Выход",:opts =>LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1050,:y=>500,:height=>50,:width=>130)
+      exit_button.connect(SEL_COMMAND) do
+        exit
+      end
+
+
       contact_tab = FXTabItem.new(tabbook, " Tab1 ")
       contact_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
       extras_tab = FXTabItem.new(tabbook, " Tab2 ")
