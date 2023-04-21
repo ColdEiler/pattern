@@ -1,4 +1,4 @@
-require_relative 'app.rb'
+require_relative 'view.rb'
 require_relative '../student_list/data_list_student_short.rb'
 require_relative '../student_list/student_client.rb'
 

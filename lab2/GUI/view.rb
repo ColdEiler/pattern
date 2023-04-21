@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-require_relative 'tab1_controller.rb'
 require 'fox16'
 include Fox
+require_relative 'controller.rb'
 
 
 class HelloWindow < FXMainWindow
