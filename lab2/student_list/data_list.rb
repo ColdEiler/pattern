@@ -5,6 +5,15 @@ class DataList
   def initialize(collection)
     self.list = collection
     self.selected_objects = []
+    @observers = []
+  end
+
+  def add_observer(observer)
+    @observers << observer
+  end
+
+  def notify
+    @observers.each{|observer| observer.datalist_changed(data)}
   end
 
   def select(id)

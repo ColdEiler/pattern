@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+require_relative 'tab1_controller.rb'
 require 'fox16'
 include Fox
+
 
 class HelloWindow < FXMainWindow
     def create_label(parent,text,x,y)
@@ -40,6 +42,13 @@ class HelloWindow < FXMainWindow
     def initialize(app)
       super(app, "Hello, World!", :width => 1200, :height => 600)
       @count_page = 3
+      
+      @count_student = 0
+      @student_on_table = 20
+      @currentpage = 1 
+      @controller =  Controller.new(self)
+
+
       tabbook = FXTabBook.new(self, :opts => LAYOUT_FILL) 
       student_tab = FXTabItem.new(tabbook, " Students ")
       student_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
@@ -92,7 +101,7 @@ class HelloWindow < FXMainWindow
       btn_back.textColor = Fox.FXRGB(0,23,175)
       #добавить отображение со страницы, на которой мы сейчас
       res=Array(1..@count_page).join(' ')
-      page_label = FXLabel.new(frame, res,:opts=> LAYOUT_EXPLICIT, :x=>280,:y=>420,:height=>30,:width=>50)
+      @page_label = FXLabel.new(frame, res,:opts=> LAYOUT_EXPLICIT, :x=>280,:y=>420,:height=>30,:width=>50)
       btn_next=FXButton.new(frame, "Далее", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>350,:y=>420,:height=>30,:width=>40)
       btn_next.textColor = Fox.FXRGB(0,23,175)
 
@@ -120,24 +129,6 @@ class HelloWindow < FXMainWindow
         table.killSelection
       end
 
-      # buttons_table = []
-      # x = 300
-      # y = 420
-      # (0..19).each do |i|
-      #   new_x = x+30*i 
-      #   buttons_table<<create_button(frame,"#{i+1}",new_x,y)
-      # end
-
-      #button_left = create_button(frame,"<-",450,420)
-      #button_right = create_button(frame,"->",600,420)
-      
-      # spinner = FXSpinner.new(frame,4,
-      #   :opts => SPIN_NORMAL|LAYOUT_EXPLICIT,
-      #   :x => 450,
-      #   :y => 420,
-      #   :width => 30,
-      #   :height => 30,
-      # )
       create_button = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
         :width=>80,:height=>25)
       update_button = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
@@ -197,6 +188,21 @@ class HelloWindow < FXMainWindow
       end      
     end
 
+    def update_student_count(count)
+      @count_student = count
+      #здесь надо отображение page_label сделать
+    
+    end
+
+    def datalist_changed(table)
+      row_number = 0 
+      table.each do |row|
+        (1..3).each do |index|
+          table.setItemText(row_number,index-1,row[index].to_s)
+        end
+        row_number+=1
+      end
+    end  
     def create
       super
       show(PLACEMENT_SCREEN)
