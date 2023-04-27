@@ -40,6 +40,7 @@ class DB_Adapter
 
     def student_count
         command = @db.exec('select count(id) from student')
+        command[0][0]
     end
 
     def get_k_n_student_short(k,n, ex_data_list = nil)
