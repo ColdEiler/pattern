@@ -37,4 +37,8 @@ class Controller
         end
     end
 
+    def get_currentpage
+        @currentpage
+    end
+
 end

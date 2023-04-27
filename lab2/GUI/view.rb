@@ -99,16 +99,18 @@ class HelloWindow < FXMainWindow
 
       btn_back=FXButton.new(frame, "Назад", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>250,:y=>420,:height=>30,:width=>40)
       btn_back.textColor = Fox.FXRGB(0,23,175)
-      #добавить отображение со страницы, на которой мы сейчас
+      label_page = FXLabel.new(frame,"1",:opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT,:x=>300,:y=>420,:height=>30,:width=>20)
       btn_next=FXButton.new(frame, "Далее", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>350,:y=>420,:height=>30,:width=>40)
       btn_next.textColor = Fox.FXRGB(0,23,175)
 
       btn_next.connect(SEL_COMMAND) do |sender|
         @controller.next_page
+        label_page.text = @controller.get_currentpage.to_s
       end
       
       btn_back.connect(SEL_COMMAND) do |sender|
         @controller.prev_page
+        label_page.text = @controller.get_currentpage.to_s
       end
 
 
