@@ -15,7 +15,8 @@ require_relative 'controller/controller.rb'
 require 'sqlite3'
 require 'yaml'
 require 'json'
-
+require 'fox16'
+include Fox
 
 # student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владислав',father_name: 'Андреевич', id: 1,git:"ColdEiler", phone:'79667665060')
 # student_2 = Student.new(lastname: 'Титов', firstname: 'Кирилл',father_name: 'Вадимович',id: 2, git:'waasabi13', phone:'79667665060')
@@ -48,7 +49,15 @@ require 'json'
 
 
 
-app = FXApp.new
-HelloWindow.new(app)
-app.create
-app.run
+if __FILE__ == $0
+    FXApp.new do |app|
+      begin
+        HelloWindow.new(app)
+        app.create
+        app.run
+      rescue SQLite3::Error::ConnectionError
+        app.create
+        FXMessageBox.error(app, MBOX_OK, 'Error', 'Can not connect to database')
+      end
+    end
+  end
