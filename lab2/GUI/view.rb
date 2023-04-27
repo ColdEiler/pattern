@@ -43,12 +43,7 @@ class HelloWindow < FXMainWindow
 
     def initialize(app)
       super(app, "Hello, World!", :width => 1200, :height => 600)
-      @count_page = 3
       
-      @count_student = 0
-      @student_on_table = 20
-      @currentpage = 1 
-
       tabbook = FXTabBook.new(self, :opts => LAYOUT_FILL) 
       student_tab = FXTabItem.new(tabbook, " Students ")
       student_page = FXVerticalFrame.new(tabbook,:opts => FRAME_RAISED|LAYOUT_FILL)
@@ -99,17 +94,22 @@ class HelloWindow < FXMainWindow
       self.table.editable = false
 
       @controller =  Controller.new(self)
-      @controller.refresh_data(1)
+      @controller.refresh_data
 
 
       btn_back=FXButton.new(frame, "Назад", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>250,:y=>420,:height=>30,:width=>40)
       btn_back.textColor = Fox.FXRGB(0,23,175)
       #добавить отображение со страницы, на которой мы сейчас
-      res=Array(1..@count_page).join(' ')
-      @page_label = FXLabel.new(frame, res,:opts=> LAYOUT_EXPLICIT, :x=>280,:y=>420,:height=>30,:width=>50)
       btn_next=FXButton.new(frame, "Далее", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>350,:y=>420,:height=>30,:width=>40)
       btn_next.textColor = Fox.FXRGB(0,23,175)
 
+      btn_next.connect(SEL_COMMAND) do |sender|
+        @controller.next_page
+      end
+      
+      btn_back.connect(SEL_COMMAND) do |sender|
+        @controller.prev_page
+      end
 
 
       create_button = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
