@@ -5,8 +5,21 @@ class Data_list_Student_Short < DataList
 
   def initialize(collection)
     super(collection)
+    @observers = []
   end
 
+  def add_observer(observer)
+    @observers<<observer
+  end
+
+  def delete_observer(observer)
+    @observers.delete(observer)
+  end
+  def notify
+    @observers.each do |observer|
+      observer.set_table_data(get_data())
+    end
+  end
   def get_names
     ["lastname_initials", "git", "contact"]
   end

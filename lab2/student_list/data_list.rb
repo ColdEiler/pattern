@@ -4,16 +4,6 @@ class DataList
   attr_writer :list
   def initialize(collection)
     self.list = collection
-    self.selected_objects = []
-    @observers = []
-  end
-
-  def add_observer(observer)
-    @observers << observer
-  end
-
-  def notify
-    @observers.each{|observer| observer.datalist_changed(data)}
   end
 
   def select(id)
@@ -21,6 +11,10 @@ class DataList
     nil
   end
 
+  def [](other)
+    self.list[other]
+  end
+  
   def get_selected
     id_list=[]
     selected_objects.each{|id| id_list << id }
