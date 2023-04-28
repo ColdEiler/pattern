@@ -5,9 +5,9 @@
 
 actor       User                                as user
 boundary    "mw: Main_window"                   as mw
-boundary    "sp: Student_page"                  as sp
+boundary    "sp: Student_tab"                   as sp
 control     "ctr: controller"                   as ctr
-entity      "sl: Student_list"                  as sl
+entity      "sl: Student_сlient"                as sl
 entity      "dlss: Data_list_student_short"     as dlss
 
 user -> mw : Open
