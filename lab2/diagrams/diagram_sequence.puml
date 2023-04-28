@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor       User                                as user
+boundary    "sp: Student_page"                  as sp
+control     "ctr: controller"                   as ctr
+entity      "sl: Student_list"                  as sl
+entity      "dlss: Data_list_student_short"     as dlss
+
+user -> sp : next table page button click
+sp -> slc : next_page
+slc -> slc : refresh_data
+slc -> sl : get_k_n_student_short
+sl -> dlss : list=
+dlss -> dlss : notify
+sp --> dlss
+sp <- dlss : set_table_data
+user <-- sp
+
+@enduml
