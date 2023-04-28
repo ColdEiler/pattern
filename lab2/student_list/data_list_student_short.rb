@@ -15,11 +15,15 @@ class Data_list_Student_Short < DataList
   def delete_observer(observer)
     @observers.delete(observer)
   end
+  
   def notify
-    @observers.each do |observer|
-      observer.set_table_data(get_data())
+    if @observers
+      @observers.each do |observer|
+        observer.set_table_data(get_data())
+      end
     end
   end
+ 
   def get_names
     ["lastname_initials", "git", "contact"]
   end
@@ -27,7 +31,7 @@ class Data_list_Student_Short < DataList
   protected
 
   def get_fields_from_datatable(object)
-    [object.lastname_initials,object.git,object.contact]
+    [object.id, object.lastname_initials,object.git,object.contact]
   end
 
 end

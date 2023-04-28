@@ -91,6 +91,7 @@ class HelloWindow < FXMainWindow
       self.table.setColumnText(1, "ФИО")
       self.table.setColumnText(2, "Git")
       self.table.setColumnText(3, "Contact")
+      
       self.table.editable = false
 
       @controller =  Controller.new(self)
@@ -167,8 +168,8 @@ class HelloWindow < FXMainWindow
     def set_table_data(data_table)
       @row_num = data_table.rows_count
       (0..data_table.rows_count-1).each do |i|
-        (0..data_table.cols_count-1).each do |j|
-          self.table.setItemText(i,j,data_table.get_item(i,j).to_s)
+        (1..data_table.cols_count-1).each do |j|
+          self.table.setItemText(i,j-1,data_table.get_item(i,j).to_s)
         end
       end
     end

@@ -22,17 +22,17 @@ include Fox
 # student_2 = Student.new(lastname: 'Титов', firstname: 'Кирилл',father_name: 'Вадимович',id: 2, git:'waasabi13', phone:'79667665060')
 #student_3 = Student.new(lastname: 'Головий',firstname: 'Виталий',father_name: 'Александрович',git:'vitaliG',phone:"79002623817")
 
-# def test(client)
-#     (0..20).each do 
-#         client.add_student(Student.new(lastname: 'Головий',firstname: 'Василий',father_name: 'Александрович',git:'vitaliG',phone:"79002623817"))
-#     end
-#     (0..20).each do 
-#         client.add_student(Student.new(lastname: 'Головий',firstname: 'Александр',father_name: 'Александрович',phone:"79002623817"))
-#     end
-#     (0..20).each do
-#         client.add_student(Student.new(lastname: 'Манукьян',firstname: 'Артур',father_name: 'Александрович',phone:"79002623817",git:'archibald'))
-#     end
-# end
+def test(client)
+    # (0..20).each do 
+    #     client.add_student(Student.new(lastname: 'Головий',firstname: 'Василий',father_name: 'Александрович',git:'vitaliG',phone:"79002623817"))
+    # end
+    # (0..20).each do 
+    #     client.add_student(Student.new(lastname: 'Головий',firstname: 'Александр',father_name: 'Александрович',phone:"79002623817"))
+    # end
+    # (0..20).each do
+    #     client.add_student(Student.new(lastname: 'Манукьян',firstname: 'Артур',father_name: 'Александрович',phone:"79002623817",git:'archibald'))
+    # end
+end
 
 # # puts "File test (JSON)"
 
@@ -43,9 +43,9 @@ include Fox
 
 # puts "File test DB"
 
-# client_db = Student_client.new(DB_Adapter.new)
+client_db = Student_client.new(DB_Adapter.new)
 
-# test(client_db)
+test(client_db)
 
 
 
