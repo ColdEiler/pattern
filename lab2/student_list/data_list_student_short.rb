@@ -28,6 +28,11 @@ class Data_list_Student_Short < DataList
     ["lastname_initials", "git", "contact"]
   end
 
+  def list=(collection)
+    super
+    notify()
+  end
+
   protected
 
   def get_fields_from_datatable(object)

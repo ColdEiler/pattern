@@ -41,6 +41,7 @@ class HelloWindow < FXMainWindow
       end
     end
 
+
     def initialize(app)
       super(app, "Hello, World!", :width => 1200, :height => 600)
       
@@ -96,6 +97,7 @@ class HelloWindow < FXMainWindow
 
       @controller =  Controller.new(self)
       @controller.refresh_data
+
 
 
       btn_back=FXButton.new(frame, "Назад", :opts=> BUTTON_INITIAL|LAYOUT_EXPLICIT, :x=>250,:y=>420,:height=>30,:width=>40)
@@ -166,6 +168,7 @@ class HelloWindow < FXMainWindow
     end
     
     def set_table_data(data_table)
+      table_empty()
       @row_num = data_table.rows_count
       (0..data_table.rows_count-1).each do |i|
         (1..data_table.cols_count-1).each do |j|
@@ -181,6 +184,13 @@ class HelloWindow < FXMainWindow
       end      
     end
 
+    def table_empty
+      (0..19).each do |i|
+        (0..3).each do |j|
+          self.table.setItemText(i,j,"")
+        end
+      end
+    end
 
     def create
       super

@@ -1,7 +1,7 @@
 class DataList
   private_class_method :new
+  attr_reader :list
 
-  attr_writer :list
   def initialize(collection)
     self.list = collection
   end
@@ -13,6 +13,12 @@ class DataList
 
   def [](other)
     self.list[other]
+  end
+
+
+  def list=(collection)
+    raise ArgumentError, "not array" if collection.class != Array
+    @list = collection
   end
   
   def get_selected
@@ -45,7 +51,6 @@ class DataList
   end
 
   private
-  attr_reader :list
   attr_accessor :selected_objects
 
 end

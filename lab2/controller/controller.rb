@@ -12,6 +12,7 @@ class Controller
         @student_client = Student_client.new(FileAdapter.new(Student_List_JSON.new,'result_files/students.json'))#DB_Adapter.new
         @pages = @student_client.student_count.div(20)+1
         @currentpage = 1
+        @data_list.add_observer(@view)
     end
 
     def show
@@ -19,10 +20,7 @@ class Controller
     end
 
     def refresh_data
-        @data_list = @student_client.get_k_n_student_short(@currentpage,20)
-        @data_list.add_observer(@view)
-        @data_list.notify()
-
+        @data_list.list = @student_client.get_k_n_student_short(@currentpage,20).list
     end
 
     def next_page
