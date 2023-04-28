@@ -261,8 +261,8 @@ class Controller{
     +prev_page
     +get_currentpage
 }
-Controller --* Page_student
-Controller o-- Page_student
+Controller --* View
+Controller o-- View
 StudentClient --o Controller
 DataListStudentShort --o Controller
 
