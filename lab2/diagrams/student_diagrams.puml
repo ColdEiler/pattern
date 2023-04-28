@@ -109,6 +109,12 @@ class DataListStudentShort extends DataList{
     --
     +initialize(Array)
     +get_names(): Array
+    +add_observer(Object)
+    +delete_observer(Object)
+    +notify()
+    __setters__
+    +list: Array
+
     #get_fields_datatable(Student_short): Array<String>
 }
 
@@ -228,5 +234,36 @@ DB_Adapter o-- DB_Source
 StudentClient ..> DataListStudentShort
 
 
+class View{
+    -view
+    -table
+    -controller
+    -- 
+    +initialize(view)
+    +create_button(FXFrame,String,Integer,Integer):FXButton
+    +create_label(FXFrame,String,Integer,Integer):FXLabel
+    +create_text(FXFrame,String,Integer,Integer):FXText
+    +sort_columns()
+    +check_combobox(FXFrame,String,Integer,Integer)
+    +set_table_data(DataTable)
+    +create()
+}
+
+class Controller{
+    -view: View
+    -student_client: StudentClient
+    -current_page: Integer
+    -all_pages: Integer
+    -data_list_student_short: DataListStudentShort
+    --
+    +refresh_data
+    +next_page
+    +prev_page
+    +get_currentpage
+}
+Controller --* Page_student
+Controller o-- Page_student
+StudentClient --o Controller
+DataListStudentShort --o Controller
 
 @enduml
