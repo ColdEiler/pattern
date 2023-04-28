@@ -55,9 +55,9 @@ if __FILE__ == $0
         HelloWindow.new(app)
         app.create
         app.run
-      # raise SQLite3::Exception
-      #   app.create
-      #   FXMessageBox.error(app, MBOX_OK, 'Error', 'Can not connect to database')
+      rescue SQLite3::SQLException 
+        app.create
+        FXMessageBox.error(app, MBOX_OK, 'Error', 'Can not connect to database')
       end
     end
   end

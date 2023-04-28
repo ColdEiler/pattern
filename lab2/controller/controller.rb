@@ -9,7 +9,7 @@ class Controller
     def initialize(view)
         @view = view
         @data_list = Data_list_Student_Short.new([])
-        @student_client = Student_client.new(FileAdapter.new(Student_List_JSON.new,'result_files/students.json'))#DB_Adapter.new
+        @student_client = Student_client.new(DB_Adapter.new)#FileAdapter.new(Student_List_JSON.new,'result_files/students.json'))#DB_Adapter.new
         @pages = @student_client.student_count.div(20)+1
         @currentpage = 1
         @data_list.add_observer(@view)
