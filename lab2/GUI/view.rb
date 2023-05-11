@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../controller/controller.rb'
+require_relative '../controller/add_student_controller.rb'
 require 'fox16'
 include Fox
 
@@ -108,7 +109,7 @@ class HelloWindow < FXMainWindow
 
       btn_next.connect(SEL_COMMAND) do |sender|
         @controller.next_page
-        label_page.text = @controller.get_currentpage.to_s
+        label_page.text = @controller.get_currentpage.to_s 
       end
       
       btn_back.connect(SEL_COMMAND) do |sender|
@@ -119,6 +120,10 @@ class HelloWindow < FXMainWindow
 
       create_button = FXButton.new(frame,"Добавить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>50,
         :width=>80,:height=>25)
+
+      create_button.connect(SEL_COMMAND) do |sender, sel, pos| 
+        @controller.show_add
+      end
       update_button = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
         :width=>80,:height=>25)
       delete_button = FXButton.new(frame,"Удалить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>150,
@@ -196,4 +201,10 @@ class HelloWindow < FXMainWindow
       super
       show(PLACEMENT_SCREEN)
     end
+
+    def controller
+      @controller
+    end
+
+    
 end

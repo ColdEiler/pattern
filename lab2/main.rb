@@ -18,10 +18,10 @@ require 'json'
 require 'fox16'
 include Fox
 
-# student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владислав',father_name: 'Андреевич', id: 1,git:"ColdEiler", phone:'79667665060')
+#student_1 = Student.new(lastname: 'Минаков ',firstname: 'Владислав',father_name: 'Андреевич', id: 1,git:"ColdEiler", phone:'79667665060')
 # student_2 = Student.new(lastname: 'Титов', firstname: 'Кирилл',father_name: 'Вадимович',id: 2, git:'waasabi13', phone:'79667665060')
 #student_3 = Student.new(lastname: 'Головий',firstname: 'Виталий',father_name: 'Александрович',git:'vitaliG',phone:"79002623817")
-
+#puts student_1
 # def test(client)
 #     # (0..20).each do 
 #     #     client.add_student(Student.new(lastname: 'Головий',firstname: 'Василий',father_name: 'Александрович',git:'vitaliG',phone:"79002623817"))

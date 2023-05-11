@@ -2,6 +2,7 @@ require_relative '../GUI/view.rb'
 require_relative '../student_list/data_list_student_short.rb'
 require_relative '../student_list/student_client.rb'
 require_relative '../student_list/DB_Adapter'
+require_relative '../GUI/create_st_dialog.rb'
 require 'fox16'
 include Fox
 
@@ -41,4 +42,18 @@ class Controller
         @currentpage
     end
 
+    def get_all_pages
+        @pages     
+    end
+
+    def add_student(student)
+        @student_client.add_student(student)
+    end
+
+    def show_add
+        add_controller = AddStudentController.new(self)
+        add_view = CreateStudentDialog.new(@view, add_controller)
+        add_controller.add_view(add_view)
+        add_view.execute
+    end
 end

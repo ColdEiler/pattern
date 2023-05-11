@@ -12,7 +12,7 @@
     "firstname": "Кирилл",
     "father_name": "Вадимович",
     "id": 2,
-    "phone": "79667665060",
+    "phone": "79667665090",
     "git": "waasabi13"
   },
   {
@@ -22,24 +22,6 @@
     "id": 3,
     "phone": "79002623817",
     "git": "vitaliG"
-  },
-  {
-    "lastname": "Манукьян",
-    "firstname": "Артур",
-    "father_name": "Арчибальдович",
-    "id": 4,
-    "phone": "79186666666",
-    "telegram": "@archi",
-    "git": "idk-artur-git"
-  },
-  {
-    "lastname": "Манукьян",
-    "firstname": "Артур",
-    "father_name": "Арчибальдович",
-    "id": 4,
-    "phone": "79186666666",
-    "telegram": "@archi",
-    "git": "idk-artur-git"
   },
   {
     "lastname": "Манукьян",

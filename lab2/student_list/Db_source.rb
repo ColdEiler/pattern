@@ -3,8 +3,7 @@ class DB_Source
     @instance_mutex = Mutex.new
 
     def initialize
-        @db = SQLite3::Database.open("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db") 
-       
+        @db = SQLite3::Database.open("C:/Users/Владислав/OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet/Рабочий стол/labs/lab2/student.db")      
     end
 
     def self.instance
