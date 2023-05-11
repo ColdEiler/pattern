@@ -126,9 +126,16 @@ class HelloWindow < FXMainWindow
       end
       update_button = FXButton.new(frame,"Обновить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>100,
         :width=>80,:height=>25)
+      
       delete_button = FXButton.new(frame,"Удалить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>150,
         :width=>80,:height=>25)
       delete_button.enabled = false
+      delete_button.connect(SEL_COMMAND) do
+        #self.table.selEndRow - self.table.selStartRow
+        @controller.del_student(self.table.selStartRow,self.table.selEndRow,self.table)
+      end
+
+
       edit_button = FXButton.new(frame,"Изменить",:opts => LAYOUT_EXPLICIT|BUTTON_NORMAL,:x=>1000,:y=>200,
         :width=>80,:height=>25)
       edit_button.enabled = false      

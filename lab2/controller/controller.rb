@@ -56,4 +56,13 @@ class Controller
         add_controller.add_view(add_view)
         add_view.execute
     end
+
+
+    def del_student(sel_row_start,sel_row_end,table)
+        (sel_row_start..sel_row_end).each do |idx|
+            id =  table.getItemText(idx,0)
+            @student_client.remove_student(id)
+        end
+        refresh_data()       
+    end
 end
